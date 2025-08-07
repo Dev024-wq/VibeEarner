@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FAQ – VibeEarning LIC Agent Recruitment</title>
+    <meta
+      name="description"
+      content="Frequently Asked Questions about joining LIC as an agent through VibeEarning. Clear your doubts about eligibility, income, training and more."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+
+    <style>
+      /* Container and main page animation */
+      main {
+        position: relative;
+        max-width: 900px;
+        margin: 4rem auto 6rem;
+        padding: 0 1.5rem;
+      }
+
+      /* Page title with fade down animation */
+      h1.page-title {
+        color: var(--primary-color);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeInDown 1s ease forwards;
+      }
+
+      /* FAQ section items styled as cards with hover effect */
+      section[aria-labelledby] {
+        background: var(--background-white);
+        margin-bottom: 1.8rem;
+        padding: 1.15rem 1.45rem;
+        border-radius: 1.2rem;
+        box-shadow: 0 4px 10px var(--shadow-light);
+        color: var(--text-dark);
+        opacity: 0;
+        transform: translateY(28px);
+        animation: fadeSlideUp 0.85s ease forwards;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease;
+        cursor: default;
+      }
+
+      /* Hover/focus lift & glow effect */
+      section[aria-labelledby]:hover,
+      section[aria-labelledby]:focus-within {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 38px var(--shadow-strong);
+        outline: none;
+        z-index: 5;
+      }
+
+      /* Stagger animation delays for FAQ items */
+      section[aria-labelledby]:nth-of-type(1) {
+        animation-delay: 0.1s;
+      }
+      section[aria-labelledby]:nth-of-type(2) {
+        animation-delay: 0.25s;
+      }
+      section[aria-labelledby]:nth-of-type(3) {
+        animation-delay: 0.4s;
+      }
+      section[aria-labelledby]:nth-of-type(4) {
+        animation-delay: 0.55s;
+      }
+      section[aria-labelledby]:nth-of-type(5) {
+        animation-delay: 0.7s;
+      }
+
+      /* Styling headings and paragraphs */
+      section h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.45rem;
+        color: var(--primary-color);
+      }
+      section p {
+        line-height: 1.45;
+        font-size: 1rem;
+        margin: 0;
+      }
+      section a {
+        color: var(--primary-hover);
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+      section a:hover,
+      section a:focus {
+        color: var(--primary-color);
+        outline: none;
+      }
+
+      /* Keyframes */
+      @keyframes fadeSlideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scroll to Top Button - same style as homepage */
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 36px;
+        right: 36px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 65%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 0.9rem 1.3rem;
+        border-radius: 55px;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
+        opacity: 0.85;
+        z-index: 9999;
+        outline: none;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+        display: none;
+      }
+      #scrollToTopBtn:hover,
+      #scrollToTopBtn:focus {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.07) rotate(-7deg);
+        box-shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
+        background: linear-gradient(
+          120deg,
+          var(--secondary-color) 40%,
+          var(--primary-color) 100%
+        );
+      }
+      #scrollToTopBtn span.arrow-up {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 24px solid #fff;
+        margin-bottom: -3px;
+        animation: arrowUpAnim 2s infinite linear;
+      }
+      @keyframes arrowUpAnim {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        35% {
+          transform: translateY(-3px);
+        }
+        60% {
+          transform: translateY(2px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header flex-between" role="banner">
+      <a
+        href="index.html"
+        class="logo flex-center"
+        aria-label="VibeEarning Home"
+      >
+        <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
+        <span class="visually-hidden">VibeEarning</span>
+      </a>
+      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+        <ul class="nav-links" role="menubar">
+          <li role="none">
+            <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
+          </li>
+          <li role="none">
+            <a href="about.html" role="menuitem" tabindex="0">About</a>
+          </li>
+          <li role="none">
+            <a href="faq.html" role="menuitem" tabindex="0" aria-current="page"
+              >FAQ</a
+            >
+          </li>
+          <li role="none">
+            <a href="legal.html" role="menuitem" tabindex="0">Compliance</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main role="main">
+      <h1 class="page-title">Frequently Asked Questions</h1>
+
+      <section aria-labelledby="faq1" tabindex="0">
+        <h2 id="faq1">
+          What are the eligibility criteria to become an LIC agent?
+        </h2>
+        <p>
+          Minimum age of 18 years, minimum education qualification is 10th pass
+          or equivalent, and Indian citizenship as per the Agents’ Regulations,
+          2017.
+        </p>
+      </section>
+
+      <section aria-labelledby="faq2" tabindex="0">
+        <h2 id="faq2">How much can I earn as an LIC agent?</h2>
+        <p>
+          Income depends on your efforts with commissions from new business
+          premiums and renewal premiums. There is no fixed salary, but the
+          earning potential is unlimited based on your dedication.
+        </p>
+      </section>
+
+      <section aria-labelledby="faq3" tabindex="0">
+        <h2 id="faq3">What training do I need to become an LIC agent?</h2>
+        <p>
+          LIC provides official pre-recruitment training. Additionally, you need
+          to clear the IRDAI IC-38 examination to get licensed as an agent.
+        </p>
+      </section>
+
+      <section aria-labelledby="faq4" tabindex="0">
+        <h2 id="faq4">Can I work flexible hours as an LIC agent?</h2>
+        <p>
+          Yes! Being an LIC agent offers you the flexibility to manage your own
+          work hours and grow your business at your own pace.
+        </p>
+      </section>
+
+      <section aria-labelledby="faq5" tabindex="0">
+        <h2 id="faq5">How do I apply to become an LIC agent?</h2>
+        <p>
+          You need to apply through the official LIC recruitment procedure,
+          complete the training, pass the certification exam, and go through an
+          interview at the LIC branch office. Our
+          <a href="join.html">Join As Agent</a> page provides detailed steps.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
+      <p>
+        &copy; 2025 VibeEarning. This is an educational site focused on LIC
+        agency recruitment and is not an official LIC property.
+      </p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
+      <span class="arrow-up"></span>
+    </button>
+
+    <script>
+      const scrollBtn = document.getElementById("scrollToTopBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
+        }
+      });
+
+      scrollBtn.addEventListener("click", () => {
+        scrollBtn.animate(
+          [
+            { transform: "rotate(0deg) scale(1)" },
+            { transform: "rotate(360deg) scale(1.25)" },
+            { transform: "rotate(390deg) scale(0.96)" },
+            { transform: "rotate(360deg) scale(1)" },
+          ],
+          { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Accessibility: Show outline only on keyboard navigation
+      function handleFirstTab(e) {
+        if (e.key === "Tab") {
+          document.body.classList.add("user-is-tabbing");
+          window.removeEventListener("keydown", handleFirstTab);
+        }
+      }
+      window.addEventListener("keydown", handleFirstTab);
+    </script>
+    <script>
+      // Waits two minutes, then sends a "real visitor" ping to backend
+      setTimeout(function () {
+        fetch("real_visit.php", { method: "POST" }).catch(() => {});
+      }, 2 * 60 * 1000);
+
+      // Loads and displays "real visitor" count
+      function updateRealVisitorStat() {
+        fetch("real_visit.php")
+          .then((resp) => resp.text())
+          .then((count) => {
+            document.querySelector(".stat-number").textContent = count;
+          });
+      }
+      // Call it right away and every 40s to keep stat fresh
+      updateRealVisitorStat();
+      setInterval(updateRealVisitorStat, 40000);
+    </script>
+
+    <!-- Help Floating Button -->
+    <style>
+      #helpFloatBtn {
+        position: fixed;
+        bottom: 100px; /* Raised above scroll button (36px + button height + margin) */
+        right: 23px;
+        z-index: 99999;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 70%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 55px;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0 3px 18px rgba(138, 43, 226, 0.14);
+        font-size: 2.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: box-shadow 0.22s, background 0.22s;
+      }
+
+      #helpFloatBtn:hover,
+      #helpFloatBtn:focus {
+        background: linear-gradient(
+          130deg,
+          var(--secondary-color),
+          var(--primary-color)
+        );
+        box-shadow: 0 8px 32px rgba(138, 43, 226, 0.18);
+      }
+
+      #help-tooltip {
+        position: absolute;
+        right: 100%;
+        bottom: 12px;
+        margin-right: 14px;
+        white-space: nowrap;
+        background: #222;
+        color: #fff;
+        font-size: 0.93rem;
+        padding: 0.45em 1.1em;
+        border-radius: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.19s;
+        box-shadow: 0 4px 12px rgba(70, 22, 120, 0.07);
+      }
+
+      #helpFloatBtn:hover #help-tooltip,
+      #helpFloatBtn:focus #help-tooltip {
+        opacity: 1;
+      }
+
+      @media (max-width: 520px) {
+        #helpFloatBtn {
+          right: 12px;
+          bottom: 90px; /* Adjust for smaller screens, still above scroll */
+          width: 46px;
+          height: 46px;
+        }
+        #help-tooltip {
+          font-size: 0.86rem;
+          right: 100%;
+        }
+      }
+    </style>
+    <a
+      id="helpFloatBtn"
+      href="join.html#contact-section"
+      title="Click to contact us"
+      aria-label="Need help? Contact us!"
+    >
+      <span style="font-size: 1.3rem" aria-hidden="true">&#x2753;</span>
+      <span id="help-tooltip" role="tooltip"
+        >Want to know more? Contact us!</span
+      >
+    </a>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compliance & Legal – VibeEarning</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+
+    <style>
+      /* Legal Page Animations */
+      main {
+        max-width: 900px;
+        margin: 3.5rem auto 6rem;
+        padding: 0 1.5rem;
+        opacity: 0;
+        animation: fadeScaleUp 1s ease forwards;
+        animation-delay: 0.1s;
+      }
+
+      h2.page-title {
+        font-weight: 700;
+        font-size: 2.2rem;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      ul.legal-list {
+        list-style: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+      }
+
+      ul.legal-list li {
+        opacity: 0;
+        color: var(--text-dark);
+        background: var(--background-white);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+        border-radius: 1rem;
+        padding: 1.3rem 1.4rem;
+        font-size: 1rem;
+        border-left: 5px solid var(--primary-color);
+        font-weight: 600;
+        animation: fadeSlideUp 0.75s ease forwards;
+        cursor: default;
+      }
+      ul.legal-list li:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+      ul.legal-list li:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      ul.legal-list li:nth-child(3) {
+        animation-delay: 0.45s;
+      }
+      ul.legal-list li:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+
+      ul.legal-list li a {
+        color: var(--primary-hover);
+        text-decoration: underline;
+        transition: color 0.25s ease;
+      }
+      ul.legal-list li a:hover,
+      ul.legal-list li a:focus {
+        color: var(--primary-color);
+        outline: none;
+      }
+
+      .legal-note {
+        margin-top: 3rem;
+        font-style: italic;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-align: center;
+        font-size: 0.95rem;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0;
+        animation: fadeScaleUp 1s ease forwards;
+        animation-delay: 0.8s;
+      }
+
+      /* Keyframes */
+      @keyframes fadeSlideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+      }
+
+      @keyframes fadeScaleUp {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Hover animation for legal list items similar to homepage cards */
+      ul.legal-list li:hover,
+      ul.legal-list li:focus-within {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 28px rgba(138, 43, 226, 0.35);
+        border-left-color: var(
+          --secondary-color
+        ); /* Slight color change on hover */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease, border-color 0.3s ease;
+        cursor: pointer;
+        z-index: 5;
+      }
+
+      /* Also add a smooth transition to the default state */
+      ul.legal-list li {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+
+      /* Scroll to top button */
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 36px;
+        right: 36px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 65%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 0.9rem 1.3rem;
+        border-radius: 55px;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
+        opacity: 0.85;
+        z-index: 9999;
+        outline: none;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+        display: none;
+      }
+      #scrollToTopBtn:hover,
+      #scrollToTopBtn:focus {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.07) rotate(-7deg);
+        box-shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
+        background: linear-gradient(
+          120deg,
+          var(--secondary-color) 40%,
+          var(--primary-color) 100%
+        );
+      }
+      #scrollToTopBtn span.arrow-up {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 24px solid #fff;
+        margin-bottom: -3px;
+        animation: arrowUpAnim 2s infinite linear;
+      }
+      @keyframes arrowUpAnim {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        35% {
+          transform: translateY(-3px);
+        }
+        60% {
+          transform: translateY(2px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header flex-between" role="banner">
+      <a
+        href="index.html"
+        class="logo flex-center"
+        aria-label="VibeEarning Home"
+      >
+        <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
+        <span class="visually-hidden">VibeEarning</span>
+      </a>
+      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+        <ul class="nav-links" role="menubar">
+          <li role="none">
+            <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
+          </li>
+          <li role="none">
+            <a href="about.html" role="menuitem" tabindex="0">About</a>
+          </li>
+          <li role="none">
+            <a href="faq.html" role="menuitem" tabindex="0">FAQ</a>
+          </li>
+          <li role="none">
+            <a
+              href="legal.html"
+              role="menuitem"
+              tabindex="0"
+              aria-current="page"
+              >Compliance</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main role="main">
+      <h2 class="page-title">Legal & Compliance</h2>
+      <ul class="legal-list" role="list">
+        <li>
+          <a
+            href="https://licindia.in/Bottom-Links/Agent-s-Portal/Become-an-Agent/Agent-s-Regulations-2017"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Agents' Regulations 2017</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.indiacode.nic.in/bitstream/123456789/1632/1/A1956-31.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Life Insurance Corporation Act, 1956</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://egazette.gov.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Government Gazette Notifications</a
+          >
+        </li>
+      </ul>
+      <p class="legal-note">
+        VibeEarning shares publicly available info only. This site is not
+        official LIC.
+      </p>
+    </main>
+
+    <footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
+      <p>
+        &copy; 2025 VibeEarning. This is an educational site focused on LIC
+        agency recruitment and is not an official LIC property.
+      </p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
+      <span class="arrow-up"></span>
+    </button>
+
+    <script>
+      const scrollBtn = document.getElementById("scrollToTopBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
+        }
+      });
+
+      scrollBtn.addEventListener("click", () => {
+        scrollBtn.animate(
+          [
+            { transform: "rotate(0deg) scale(1)" },
+            { transform: "rotate(360deg) scale(1.25)" },
+            { transform: "rotate(390deg) scale(0.96)" },
+            { transform: "rotate(360deg) scale(1)" },
+          ],
+          { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Accessibility: Show outline only on keyboard navigation
+      function handleFirstTab(e) {
+        if (e.key === "Tab") {
+          document.body.classList.add("user-is-tabbing");
+          window.removeEventListener("keydown", handleFirstTab);
+        }
+      }
+      window.addEventListener("keydown", handleFirstTab);
+    </script>
+    <script>
+      // Waits two minutes, then sends a "real visitor" ping to backend
+      setTimeout(function () {
+        fetch("real_visit.php", { method: "POST" }).catch(() => {});
+      }, 2 * 60 * 1000);
+
+      // Loads and displays "real visitor" count
+      function updateRealVisitorStat() {
+        fetch("real_visit.php")
+          .then((resp) => resp.text())
+          .then((count) => {
+            document.querySelector(".stat-number").textContent = count;
+          });
+      }
+      // Call it right away and every 40s to keep stat fresh
+      updateRealVisitorStat();
+      setInterval(updateRealVisitorStat, 40000);
+    </script>
+  </body>
+</html>
