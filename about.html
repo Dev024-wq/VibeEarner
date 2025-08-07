@@ -443,6 +443,80 @@
           margin-bottom: 1.6rem;
         }
       }
+
+      /* New styles for responsive mobile nav with hamburger */
+      /* Hide hamburger by default */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 28px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 10001;
+      }
+      .hamburger:focus {
+        outline: 3px solid var(--primary-color);
+        outline-offset: 2px;
+      }
+      .hamburger div {
+        width: 28px;
+        height: 3px;
+        background: var(--primary-color);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      /* Hamburger active state */
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* On screens ≤480px, hide nav links and show hamburger */
+      @media (max-width: 480px) {
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 280px;
+          background-color: var(--background-white);
+          flex-direction: column;
+          gap: 1.5rem;
+          padding-top: 6rem;
+          box-shadow: -6px 0 18px rgba(0, 0, 0, 0.1);
+          transform: translateX(100%);
+          transition: transform 0.3s ease var(--ease-curve);
+          z-index: 10000;
+        }
+        .nav-links.open {
+          transform: translateX(0);
+        }
+        .nav-links li {
+          padding-left: 1.5rem;
+        }
+        .nav-links a {
+          font-size: 1.25rem;
+          padding: 0.75rem 0;
+          display: block;
+        }
+        /* Show hamburger button */
+        .hamburger {
+          display: flex;
+        }
+        /* Navbar padding - reduce */
+        .navbar {
+          padding: 0 1rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -456,8 +530,21 @@
         <img src="assets/img/logo.png" alt="VibeEarning Logo" height="50" />
         <span class="visually-hidden">VibeEarning</span>
       </a>
+
+      <!-- Hamburger button for mobile -->
+      <button
+        class="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+
       <nav class="navbar" role="navigation" aria-label="Primary navigation">
-        <ul class="nav-links" role="menubar">
+        <ul class="nav-links" role="menubar" id="primary-navigation">
           <li role="none">
             <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
           </li>
@@ -541,302 +628,303 @@
         </div>
 
         <!-- Testimonials Section -->
-       <style>
-/* --- Testimonials Slider Styles --- */
-.testimonials-section {
-  margin: 3.5rem auto 1.8rem auto;
-  max-width: 900px;
-  text-align: center;
-}
-.section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--primary-color, #8a2be2);
-  margin-bottom: 2.3rem;
-  letter-spacing: 0.01em;
-}
-.testimonials-slider-wrapper {
-  position: relative;
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
-  overflow: hidden;
-}
-.testimonials-slider {
-  display: flex;
-  transition: transform 0.45s cubic-bezier(.7,.14,.31,1);
-  will-change: transform;
-}
-.testimonial-card {
-  min-width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 1.2rem;
-  box-shadow: 0 8px 32px rgba(138, 43, 226, 0.07);
-  padding: 2.3rem 1.3rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 1;
-}
-.testimonial-photo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1.1rem;
-  border: 2.5px solid var(--primary-color, #8a2be2);
-}
-.testimonial-card blockquote {
-  margin: 0;
-  font-style: italic;
-  color: #444;
-}
-.testimonial-card footer {
-  margin-top: .8em;
-  color: var(--primary-color, #8a2be2);
-  font-weight: 700;
-  font-size: 1rem;
-}
-.testimonial-nav {
-  background: rgba(138, 43, 226, 0.09);
-  border: none;
-  border-radius: 55%;
-  color: var(--primary-color, #8a2be2);
-  font-size: 2.3rem;
-  width: 46px;
-  height: 46px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: background .2s, color .2s;
-  cursor: pointer;
-  z-index: 4;
-  box-shadow: 0 4px 20px rgba(138,43,226,.09);
-  outline: none;
-}
-.testimonial-nav.prev { left: -18px; }
-.testimonial-nav.next { right: -18px; }
-.testimonial-nav:hover, .testimonial-nav:focus {
-  background: linear-gradient(135deg, #8a2be2 70%, #ff9800 100%);
-  color: #fff;
-}
-@media (max-width: 700px) {
-  .testimonials-slider-wrapper { max-width: 98vw; }
-  .testimonial-card, .testimonials-slider { min-width: 100%; max-width: 100%; }
-  .testimonial-nav.prev { left: 0; }
-  .testimonial-nav.next { right: 0; }
-}
-.testimonial-quote {
-  margin: 3rem auto 0;
-  max-width: 650px;
-  font-size: 1.15rem;
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  opacity: 0;
-  animation: fadeInTestimonialQuote 1.2s 0.7s forwards;
-}
-.testimonial-quote-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 90%;
-  object-fit: cover;
-  border: 2.5px solid var(--primary-color, #8a2be2);
-}
-@keyframes fadeInTestimonialQuote {
-  0% { opacity: 0; transform: translateY(32px);}
-  100% { opacity: 1; transform: none;}
-}
-.mt-8 { margin-top: 2rem; }
-.text-center { text-align: center;}
-.text-sm { font-size: 1.03rem;}
-.italic { font-style: italic;}
-.text-gray-600 { color: #5b5a70;}
-.about-animate-in { opacity: 0; animation: fadeInTestimonialQuote 1.3s 0.82s forwards;}
-</style>
+        <style>
+          /* --- Testimonials Slider Styles --- */
+          .testimonials-section {
+            margin: 3.5rem auto 1.8rem auto;
+            max-width: 900px;
+            text-align: center;
+          }
+          .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color, #8a2be2);
+            margin-bottom: 2.3rem;
+            letter-spacing: 0.01em;
+          }
+          .testimonials-slider-wrapper {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            overflow: hidden;
+          }
+          .testimonials-slider {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(.7,.14,.31,1);
+            will-change: transform;
+          }
+          .testimonial-card {
+            min-width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.07);
+            padding: 2.3rem 1.3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 1;
+          }
+          .testimonial-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.1rem;
+            border: 2.5px solid var(--primary-color, #8a2be2);
+          }
+          .testimonial-card blockquote {
+            margin: 0;
+            font-style: italic;
+            color: #444;
+          }
+          .testimonial-card footer {
+            margin-top: .8em;
+            color: var(--primary-color, #8a2be2);
+            font-weight: 700;
+            font-size: 1rem;
+          }
+          .testimonial-nav {
+            background: rgba(138, 43, 226, 0.09);
+            border: none;
+            border-radius: 55%;
+            color: var(--primary-color, #8a2be2);
+            font-size: 2.3rem;
+            width: 46px;
+            height: 46px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: background .2s, color .2s;
+            cursor: pointer;
+            z-index: 4;
+            box-shadow: 0 4px 20px rgba(138,43,226,.09);
+            outline: none;
+          }
+          .testimonial-nav.prev { left: -18px; }
+          .testimonial-nav.next { right: -18px; }
+          .testimonial-nav:hover, .testimonial-nav:focus {
+            background: linear-gradient(135deg, #8a2be2 70%, #ff9800 100%);
+            color: #fff;
+          }
+          @media (max-width: 700px) {
+            .testimonials-slider-wrapper { max-width: 98vw; }
+            .testimonial-card, .testimonials-slider { min-width: 100%; max-width: 100%; }
+            .testimonial-nav.prev { left: 0; }
+            .testimonial-nav.next { right: 0; }
+          }
+          .testimonial-quote {
+            margin: 3rem auto 0;
+            max-width: 650px;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            opacity: 0;
+            animation: fadeInTestimonialQuote 1.2s 0.7s forwards;
+          }
+          .testimonial-quote-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 90%;
+            object-fit: cover;
+            border: 2.5px solid var(--primary-color, #8a2be2);
+          }
+          @keyframes fadeInTestimonialQuote {
+            0% { opacity: 0; transform: translateY(32px);}
+            100% { opacity: 1; transform: none;}
+          }
+          .mt-8 { margin-top: 2rem; }
+          .text-center { text-align: center;}
+          .text-sm { font-size: 1.03rem;}
+          .italic { font-style: italic;}
+          .text-gray-600 { color: #5b5a70;}
+          .about-animate-in { opacity: 0; animation: fadeInTestimonialQuote 1.3s 0.82s forwards;}
+        </style>
 
-<section class="testimonials-section" aria-labelledby="testimonials-title">
-  <h2 id="testimonials-title" class="section-title">
-    What Our Top Agents Say
-  </h2>
-  <div class="testimonials-slider-wrapper">
-    <button class="testimonial-nav prev" aria-label="Previous testimonial">&#8249;</button>
-    <div class="testimonials-slider" tabindex="0">
+        <section class="testimonials-section" aria-labelledby="testimonials-title">
+          <h2 id="testimonials-title" class="section-title">
+            What Our Top Agents Say
+          </h2>
+          <div class="testimonials-slider-wrapper">
+            <button class="testimonial-nav prev" aria-label="Previous testimonial">&#8249;</button>
+            <div class="testimonials-slider" tabindex="0">
 
-      <!-- Card 1 -->
-      <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent6.png"
-          alt="Photo of Agent Sajitsinh Parmar"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "Joining LIC agency transformed my career. The training and support from VibeEarning made everything seamless."
+              <!-- Card 1 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent6.png"
+                  alt="Photo of Agent Sajitsinh Parmar"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "Joining LIC agency transformed my career. The training and support from VibeEarning made everything seamless."
+                  </p>
+                  <footer>-Sajitsinh Parmar, 14 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent7.jpg"
+                  alt="Photo of Agent Miteshbhai Chamar"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "It’s more than a job—it's a family. The growth and recognition I get here is amazing."
+                  </p>
+                  <footer>- Miteshbhai Chamar, 13 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent8.png"
+                  alt="Photo of Agent Vaishaliben Patel"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "VibeEarning’s mentorship and the sense of community helped me grow rapidly as an LIC agent."
+                  </p>
+                  <footer>- VaishaliBen Patel, 12 years</footer>
+                </blockquote>
+              </article>
+              
+              <!-- Card 4 -->
+            <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent2.png"
+                  alt="Photo of Agent Jivanbhai Bharwad"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The flexible hours allow me to balance family and work. The income is rewarding, and the clients are very appreciative."
+                  </p>
+                  <footer>- Jivanbhai Bharwad, 11 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 5 -->
+            <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent4.png"
+                  alt="Photo of Agent VikramSinh Rathod"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "Never thought a second career could be this rewarding. I gained financial freedom and new friends."
+                  </p>
+                  <footer>-VikramSinh Rathod, 10 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 6 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent1.png"
+                  alt="Photo of Agent Snehal Prajapati"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The IRDAI exam guidance and onboarding help were critical for my success. Highly recommended!"
+                  </p>
+                  <footer>-Snehal Prajapati, 5 years</footer>
+                </blockquote>
+              </article>
+              <!-- Card 7 -->
+                <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent5.png"
+                  alt="Photo of Agent Bharatbhai Barot"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The continual support makes VibeEarning stand out. It’s a team with values, not just business."
+                  </p>
+                  <footer>-Bharatbhai Barot, 5 years</footer>
+                </blockquote>
+              </article>
+
+            </div>
+            <button class="testimonial-nav next" aria-label="Next testimonial">&#8250;</button>
+          </div>
+
+          <!-- Photo blockquote as requested -->
+          <blockquote class="about-animate-in testimonial-quote" style="animation-delay: 0.7s">
+            <img src="assets/img/vraj.png" alt="Photo of Mr. Vraj Patel" class="testimonial-quote-photo" />
+            <div>
+              <p>
+                "Mr.Chavda provided the best guidance and care for our family’s insurance needs. A trusted advisor who truly understands his clients."
+              </p>
+              <footer>— Mr. Vraj Patel</footer>
+            </div>
+          </blockquote>
+          <p
+            class="about-animate-in mt-8 text-center text-sm italic text-gray-600"
+            style="animation-delay: 0.82s"
+          >
+            Committed to education, free seminars, and community service to promote financial literacy for all.
           </p>
-          <footer>-Sajitsinh Parmar, 14 years</footer>
-        </blockquote>
-      </article>
+        </section>
 
-      <!-- Card 2 -->
-      <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent7.jpg"
-          alt="Photo of Agent Miteshbhai Chamar"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "It’s more than a job—it's a family. The growth and recognition I get here is amazing."
-          </p>
-          <footer>- Miteshbhai Chamar, 13 years</footer>
-        </blockquote>
-      </article>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.testimonials-slider');
+            const cards = document.querySelectorAll('.testimonial-card');
+            const prevBtn = document.querySelector('.testimonial-nav.prev');
+            const nextBtn = document.querySelector('.testimonial-nav.next');
+            let currentIndex = 0;
+            const total = cards.length;
 
-      <!-- Card 3 -->
-      <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent8.png"
-          alt="Photo of Agent Vaishaliben Patel"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "VibeEarning’s mentorship and the sense of community helped me grow rapidly as an LIC agent."
-          </p>
-          <footer>- VaishaliBen Patel, 12 years</footer>
-        </blockquote>
-      </article>
-      
-      <!-- Card 4 -->
- <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent2.png"
-          alt="Photo of Agent Jivanbhai Bharwad"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "The flexible hours allow me to balance family and work. The income is rewarding, and the clients are very appreciative."
-          </p>
-          <footer>- Jivanbhai Bharwad, 11 years</footer>
-        </blockquote>
-      </article>
+            function updateSlider() {
+              slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+            }
 
-      <!-- Card 5 -->
-<article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent4.png"
-          alt="Photo of Agent VikramSinh Rathod"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "Never thought a second career could be this rewarding. I gained financial freedom and new friends."
-          </p>
-          <footer>-VikramSinh Rathod, 10 years</footer>
-        </blockquote>
-      </article>
+            prevBtn.addEventListener('click', function() {
+              currentIndex = (currentIndex === 0) ? total - 1 : currentIndex - 1;
+              updateSlider();
+            });
 
-      <!-- Card 6 -->
-      <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent1.png"
-          alt="Photo of Agent Snehal Prajapati"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "The IRDAI exam guidance and onboarding help were critical for my success. Highly recommended!"
-          </p>
-          <footer>-Snehal Prajapati, 5 years</footer>
-        </blockquote>
-      </article>
-      <!-- Card 7 -->
-        <article class="testimonial-card" tabindex="0">
-        <img
-          src="assets/img/agent5.png"
-          alt="Photo of Agent Bharatbhai Barot"
-          class="testimonial-photo"
-        />
-        <blockquote>
-          <p>
-            "The continual support makes VibeEarning stand out. It’s a team with values, not just business."
-          </p>
-          <footer>-Bharatbhai Barot, 5 years</footer>
-        </blockquote>
-      </article>
+            nextBtn.addEventListener('click', function() {
+              currentIndex = (currentIndex === total - 1) ? 0 : currentIndex + 1;
+              updateSlider();
+            });
 
-    </div>
-    <button class="testimonial-nav next" aria-label="Next testimonial">&#8250;</button>
-  </div>
+            // Touch swipe for mobile
+            let startX = 0, isDragging = false;
+            slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging=true; });
+            slider.addEventListener('touchend', e => { isDragging=false; });
+            slider.addEventListener('touchmove', function(e) {
+              if (!isDragging) return;
+              let diff = e.touches[0].clientX - startX;
+              if (Math.abs(diff) > 60) {
+                if (diff > 0) prevBtn.click();
+                else nextBtn.click();
+                isDragging = false;
+              }
+            });
 
-  <!-- Photo blockquote as requested -->
-  <blockquote class="about-animate-in testimonial-quote" style="animation-delay: 0.7s">
-    <img src="assets/img/vraj.png" alt="Photo of Mr. Vraj Patel" class="testimonial-quote-photo" />
-    <div>
-      <p>
-        "Mr.Chavda provided the best guidance and care for our family’s insurance needs. A trusted advisor who truly understands his clients."
-      </p>
-      <footer>— Mr. Vraj Patel</footer>
-    </div>
-  </blockquote>
-  <p
-    class="about-animate-in mt-8 text-center text-sm italic text-gray-600"
-    style="animation-delay: 0.82s"
-  >
-    Committed to education, free seminars, and community service to promote financial literacy for all.
-  </p>
-</section>
+            // Keyboard navigation
+            slider.parentNode.addEventListener('keydown', function(e) {
+              if (e.key === "ArrowRight" || e.key === "d") nextBtn.click();
+              if (e.key === "ArrowLeft" || e.key === "a") prevBtn.click();
+            });
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const slider = document.querySelector('.testimonials-slider');
-  const cards = document.querySelectorAll('.testimonial-card');
-  const prevBtn = document.querySelector('.testimonial-nav.prev');
-  const nextBtn = document.querySelector('.testimonial-nav.next');
-  let currentIndex = 0;
-  const total = cards.length;
-
-  function updateSlider() {
-    slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
-  }
-
-  prevBtn.addEventListener('click', function() {
-    currentIndex = (currentIndex === 0) ? total - 1 : currentIndex - 1;
-    updateSlider();
-  });
-
-  nextBtn.addEventListener('click', function() {
-    currentIndex = (currentIndex === total - 1) ? 0 : currentIndex + 1;
-    updateSlider();
-  });
-
-  // Touch swipe for mobile
-  let startX = 0, isDragging = false;
-  slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging=true; });
-  slider.addEventListener('touchend', e => { isDragging=false; });
-  slider.addEventListener('touchmove', function(e) {
-    if (!isDragging) return;
-    let diff = e.touches[0].clientX - startX;
-    if (Math.abs(diff) > 60) {
-      if (diff > 0) prevBtn.click();
-      else nextBtn.click();
-      isDragging = false;
-    }
-  });
-
-  // Keyboard navigation
-  slider.parentNode.addEventListener('keydown', function(e) {
-    if (e.key === "ArrowRight" || e.key === "d") nextBtn.click();
-    if (e.key === "ArrowLeft" || e.key === "a") prevBtn.click();
-  });
-
-  updateSlider();
-});
-</script>
-
+            updateSlider();
+          });
+        </script>
+      </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
@@ -883,6 +971,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       window.addEventListener("keydown", handleFirstTab);
     </script>
+
     <script>
       // Waits two minutes, then sends a "real visitor" ping to backend
       setTimeout(function () {
@@ -900,6 +989,44 @@ document.addEventListener('DOMContentLoaded', function() {
       // Call it right away and every 40s to keep stat fresh
       updateRealVisitorStat();
       setInterval(updateRealVisitorStat, 40000);
+    </script>
+
+    <!-- New JS for hamburger menu toggle -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function() {
+          const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+          this.setAttribute('aria-expanded', !expanded);
+          this.classList.toggle('active');
+          navLinks.classList.toggle('open');
+          // Optional: prevent body scroll when nav open on mobile
+          if(navLinks.classList.contains('open')){
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = '';
+          }
+        });
+
+        // Close menu when a link is clicked (optional for UX)
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            if(navLinks.classList.contains('open')){
+              hamburger.click();
+            }
+          });
+        });
+
+        // Close menu with ESC key (accessibility)
+        document.addEventListener('keydown', (e) => {
+          if(e.key === "Escape" && navLinks.classList.contains('open')){
+            hamburger.click();
+            hamburger.focus();
+          }
+        });
+      });
     </script>
   </body>
 </html>
