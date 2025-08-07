@@ -80,6 +80,7 @@
         font-weight: 600;
         padding: 0;
         margin: 0;
+        transition: transform 0.3s ease;
       }
       nav.navbar ul.nav-links li a {
         color: var(--text-dark);
@@ -102,6 +103,17 @@
         font-weight: 700;
         border-bottom: 2px solid var(--primary-color);
       }
+
+      /* Hamburger menu button for mobile */
+      #menuToggle {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        display: none;
+        color: var(--primary-color);
+      }
+
       /* Section */
       .fade-section {
         opacity: 0;
@@ -115,11 +127,7 @@
         }
       }
       .join-section {
-        background: linear-gradient(
-          96deg,
-          var(--background-light),
-          #e5f3ff 90%
-        );
+        background: linear-gradient(96deg, var(--background-light), #e5f3ff 90%);
         border-radius: 1.3rem;
         max-width: 900px;
         margin: 3.7rem auto 2rem auto;
@@ -179,11 +187,7 @@
         position: absolute;
         top: -16px;
         left: 1.2em;
-        background: linear-gradient(
-          135deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         color: #fff;
         font-weight: 700;
         font-size: 1.07rem;
@@ -555,20 +559,53 @@
         .btn-outline {
           margin-top: 0.3rem;
         }
+        /* Hide default nav links on small, show hamburger */
+        nav.navbar ul.nav-links {
+          flex-direction: column;
+          background-color: var(--background-white);
+          position: fixed;
+          top: 60px;
+          right: 0;
+          width: 180px;
+          padding: 1rem;
+          box-shadow: 0 4px 15px var(--shadow-strong);
+          transform: translateX(100%);
+          height: calc(100% - 60px);
+          overflow-y: auto;
+          z-index: 10001;
+          transition: transform 0.3s ease;
+        }
+        nav.navbar ul.nav-links.open {
+          transform: translateX(0);
+        }
+        nav.navbar ul.nav-links li a {
+          border-bottom: 1px solid #eee;
+          font-size: 0.875rem;
+          padding: 0.5em 0;
+        }
+        #menuToggle {
+          display: block;
+        }
       }
     </style>
   </head>
   <body>
     <header class="header flex-between" role="banner">
-      <a
-        href="index.html"
-        class="logo flex-center"
-        aria-label="VibeEarning Home"
-      >
+      <a href="index.html" class="logo flex-center" aria-label="VibeEarning Home">
         <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
       </a>
+      <!-- Hamburger toggle button for mobile -->
+      <button
+        id="menuToggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="primary-menu"
+        type="button"
+      >
+        ☰
+      </button>
       <nav class="navbar" role="navigation" aria-label="Primary navigation">
-        <ul class="nav-links" role="menubar">
+        <ul id="primary-menu" class="nav-links" role="menubar">
           <li role="none">
             <a href="join.html" role="menuitem" tabindex="0" aria-current="page"
               >Join As Agent</a
@@ -604,28 +641,22 @@
             <div class="step-badge" aria-hidden="true">2</div>
             <h3 class="step-title">Complete Official Training</h3>
             <p class="step-desc">
-              Attend LIC's authorized pre-recruitment program (offline or
-              online).
+              Attend LIC's authorized pre-recruitment program (offline or online).
             </p>
           </article>
           <article class="step-card" tabindex="0">
             <div class="step-badge" aria-hidden="true">3</div>
             <h3 class="step-title">Pass IRDAI Exam</h3>
-            <p class="step-desc">
-              Clear the IC-38 examination to get licensing.
-            </p>
+            <p class="step-desc">Clear the IC-38 examination to get licensing.</p>
           </article>
           <article class="step-card" tabindex="0">
             <div class="step-badge" aria-hidden="true">4</div>
             <h3 class="step-title">Branch Interview & Onboarding</h3>
-            <p class="step-desc">
-              Attend LIC branch interview and start your journey.
-            </p>
+            <p class="step-desc">Attend LIC branch interview and start your journey.</p>
           </article>
         </div>
         <p class="join-note">
-          Want more info? See <a href="faq.html">FAQ</a> or
-          <a href="about.html">About</a>.
+          Want more info? See <a href="faq.html">FAQ</a> or <a href="about.html">About</a>.
         </p>
       </section>
       <section
@@ -718,9 +749,7 @@
               margin-top: 0.8rem;
             "
           >
-            <button class="btn btn-primary" type="submit">
-              Submit Application
-            </button>
+            <button class="btn btn-primary" type="submit">Submit Application</button>
             <button class="btn btn-outline" type="button" id="clearBtn">
               Clear Details
             </button>
@@ -751,6 +780,15 @@
         document
           .getElementById("clearBtn")
           .addEventListener("click", () => form.reset());
+
+        // Hamburger menu toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("primary-menu");
+        menuToggle.addEventListener("click", () => {
+          const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", String(!expanded));
+          navLinks.classList.toggle("open");
+        });
       });
 
       // Scroll to top button logic
@@ -793,8 +831,6 @@
         fetch("real_visit.php")
           .then((resp) => resp.text())
           .then((count) => {
-            // Assuming somewhere in your actual page you display this count
-            // No element in this snippet: so safely ignore or update if present
             const statNum = document.querySelector(".stat-number");
             if (statNum) statNum.textContent = count;
           })
