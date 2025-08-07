@@ -650,7 +650,7 @@
           }
           .testimonials-slider {
             display: flex;
-            transition: transform 0.45s cubic-bezier(.7,.14,.31,1);
+            transition: transform 0.45s cubic-bezier(0.7, 0.14, 0.31, 1);
             will-change: transform;
           }
           .testimonial-card {
@@ -680,7 +680,7 @@
             color: #444;
           }
           .testimonial-card footer {
-            margin-top: .8em;
+            margin-top: 0.8em;
             color: var(--primary-color, #8a2be2);
             font-weight: 700;
             font-size: 1rem;
@@ -696,23 +696,38 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            transition: background .2s, color .2s;
+            transition: background 0.2s, color 0.2s;
             cursor: pointer;
             z-index: 4;
-            box-shadow: 0 4px 20px rgba(138,43,226,.09);
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.09);
             outline: none;
           }
-          .testimonial-nav.prev { left: -18px; }
-          .testimonial-nav.next { right: -18px; }
-          .testimonial-nav:hover, .testimonial-nav:focus {
+          .testimonial-nav.prev {
+            left: -18px;
+          }
+          .testimonial-nav.next {
+            right: -18px;
+          }
+          .testimonial-nav:hover,
+          .testimonial-nav:focus {
             background: linear-gradient(135deg, #8a2be2 70%, #ff9800 100%);
             color: #fff;
           }
           @media (max-width: 700px) {
-            .testimonials-slider-wrapper { max-width: 98vw; }
-            .testimonial-card, .testimonials-slider { min-width: 100%; max-width: 100%; }
-            .testimonial-nav.prev { left: 0; }
-            .testimonial-nav.next { right: 0; }
+            .testimonials-slider-wrapper {
+              max-width: 98vw;
+            }
+            .testimonial-card,
+            .testimonials-slider {
+              min-width: 100%;
+              max-width: 100%;
+            }
+            .testimonial-nav.prev {
+              left: 0;
+            }
+            .testimonial-nav.next {
+              right: 0;
+            }
           }
           .testimonial-quote {
             margin: 3rem auto 0;
@@ -732,25 +747,51 @@
             border: 2.5px solid var(--primary-color, #8a2be2);
           }
           @keyframes fadeInTestimonialQuote {
-            0% { opacity: 0; transform: translateY(32px);}
-            100% { opacity: 1; transform: none;}
+            0% {
+              opacity: 0;
+              transform: translateY(32px);
+            }
+            100% {
+              opacity: 1;
+              transform: none;
+            }
           }
-          .mt-8 { margin-top: 2rem; }
-          .text-center { text-align: center;}
-          .text-sm { font-size: 1.03rem;}
-          .italic { font-style: italic;}
-          .text-gray-600 { color: #5b5a70;}
-          .about-animate-in { opacity: 0; animation: fadeInTestimonialQuote 1.3s 0.82s forwards;}
+          .mt-8 {
+            margin-top: 2rem;
+          }
+          .text-center {
+            text-align: center;
+          }
+          .text-sm {
+            font-size: 1.03rem;
+          }
+          .italic {
+            font-style: italic;
+          }
+          .text-gray-600 {
+            color: #5b5a70;
+          }
+          .about-animate-in {
+            opacity: 0;
+            animation: fadeInTestimonialQuote 1.3s 0.82s forwards;
+          }
         </style>
 
-        <section class="testimonials-section" aria-labelledby="testimonials-title">
+        <section
+          class="testimonials-section"
+          aria-labelledby="testimonials-title"
+        >
           <h2 id="testimonials-title" class="section-title">
             What Our Top Agents Say
           </h2>
           <div class="testimonials-slider-wrapper">
-            <button class="testimonial-nav prev" aria-label="Previous testimonial">&#8249;</button>
+            <button
+              class="testimonial-nav prev"
+              aria-label="Previous testimonial"
+            >
+              &#8249;
+            </button>
             <div class="testimonials-slider" tabindex="0">
-
               <!-- Card 1 -->
               <article class="testimonial-card" tabindex="0">
                 <img
@@ -760,7 +801,8 @@
                 />
                 <blockquote>
                   <p>
-                    "Joining LIC agency transformed my career. The training and support from VibeEarning made everything seamless."
+                    "Joining LIC agency transformed my career. The training and
+                    support from VibeEarning made everything seamless."
                   </p>
                   <footer>-Sajitsinh Parmar, 14 years</footer>
                 </blockquote>
@@ -775,29 +817,31 @@
                 />
                 <blockquote>
                   <p>
-                    "It’s more than a job—it's a family. The growth and recognition I get here is amazing."
+                    "It’s more than a job—it's a family. The growth and
+                    recognition I get here is amazing."
                   </p>
-                  <footer>- Miteshbhai Chamar, 13 years</footer>
+                  <footer>- Nikeshbhai Chamar, 13 years</footer>
                 </blockquote>
               </article>
 
               <!-- Card 3 -->
               <article class="testimonial-card" tabindex="0">
                 <img
-                  src="assets/img/agent8.png"
-                  alt="Photo of Agent Vaishaliben Patel"
+                  src="assets/img/vraj.png"
+                  alt="Photo of Agent Vraj Patel"
                   class="testimonial-photo"
                 />
                 <blockquote>
                   <p>
-                    "VibeEarning’s mentorship and the sense of community helped me grow rapidly as an LIC agent."
+                    "VibeEarning’s mentorship and the sense of community helped
+                    me grow rapidly as an LIC agent."
                   </p>
-                  <footer>- VaishaliBen Patel, 12 years</footer>
+                  <footer>- Vraj Patel, 12 years</footer>
                 </blockquote>
               </article>
-              
+
               <!-- Card 4 -->
-            <article class="testimonial-card" tabindex="0">
+              <article class="testimonial-card" tabindex="0">
                 <img
                   src="assets/img/agent2.png"
                   alt="Photo of Agent Jivanbhai Bharwad"
@@ -805,14 +849,15 @@
                 />
                 <blockquote>
                   <p>
-                    "The flexible hours allow me to balance family and work. The income is rewarding, and the clients are very appreciative."
+                    "The flexible hours allow me to balance family and work. The
+                    income is rewarding, and the clients are very appreciative."
                   </p>
                   <footer>- Jivanbhai Bharwad, 11 years</footer>
                 </blockquote>
               </article>
 
               <!-- Card 5 -->
-            <article class="testimonial-card" tabindex="0">
+              <article class="testimonial-card" tabindex="0">
                 <img
                   src="assets/img/agent4.png"
                   alt="Photo of Agent VikramSinh Rathod"
@@ -820,7 +865,8 @@
                 />
                 <blockquote>
                   <p>
-                    "Never thought a second career could be this rewarding. I gained financial freedom and new friends."
+                    "Never thought a second career could be this rewarding. I
+                    gained financial freedom and new friends."
                   </p>
                   <footer>-VikramSinh Rathod, 10 years</footer>
                 </blockquote>
@@ -835,13 +881,14 @@
                 />
                 <blockquote>
                   <p>
-                    "The IRDAI exam guidance and onboarding help were critical for my success. Highly recommended!"
+                    "The IRDAI exam guidance and onboarding help were critical
+                    for my success. Highly recommended!"
                   </p>
                   <footer>-Snehal Prajapati, 5 years</footer>
                 </blockquote>
               </article>
               <!-- Card 7 -->
-                <article class="testimonial-card" tabindex="0">
+              <article class="testimonial-card" tabindex="0">
                 <img
                   src="assets/img/agent5.png"
                   alt="Photo of Agent Bharatbhai Barot"
@@ -849,62 +896,81 @@
                 />
                 <blockquote>
                   <p>
-                    "The continual support makes VibeEarning stand out. It’s a team with values, not just business."
+                    "The continual support makes VibeEarning stand out. It’s a
+                    team with values, not just business."
                   </p>
                   <footer>-Bharatbhai Barot, 5 years</footer>
                 </blockquote>
               </article>
-
             </div>
-            <button class="testimonial-nav next" aria-label="Next testimonial">&#8250;</button>
+            <button class="testimonial-nav next" aria-label="Next testimonial">
+              &#8250;
+            </button>
           </div>
 
           <!-- Photo blockquote as requested -->
-          <blockquote class="about-animate-in testimonial-quote" style="animation-delay: 0.7s">
-            <img src="assets/img/vraj.png" alt="Photo of Mr. Vraj Patel" class="testimonial-quote-photo" />
+          <blockquote
+            class="about-animate-in testimonial-quote"
+            style="animation-delay: 0.7s"
+          >
+            <img
+              src="assets/img/vaishaliben.jpg"
+              alt="Photo of Mr. Vaishaliben Patel"
+              class="testimonial-quote-photo"
+            />
             <div>
               <p>
-                "Mr.Chavda provided the best guidance and care for our family’s insurance needs. A trusted advisor who truly understands his clients."
+                "Mr.Chavda provided the best guidance and care for our family’s
+                insurance needs. A trusted advisor who truly understands his
+                clients."
               </p>
-              <footer>— Mr. Vraj Patel</footer>
+              <footer>— Mrs. Vaishaliben Patel</footer>
             </div>
           </blockquote>
           <p
             class="about-animate-in mt-8 text-center text-sm italic text-gray-600"
             style="animation-delay: 0.82s"
           >
-            Committed to education, free seminars, and community service to promote financial literacy for all.
+            Committed to education, free seminars, and community service to
+            promote financial literacy for all.
           </p>
         </section>
 
         <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const slider = document.querySelector('.testimonials-slider');
-            const cards = document.querySelectorAll('.testimonial-card');
-            const prevBtn = document.querySelector('.testimonial-nav.prev');
-            const nextBtn = document.querySelector('.testimonial-nav.next');
+          document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.querySelector(".testimonials-slider");
+            const cards = document.querySelectorAll(".testimonial-card");
+            const prevBtn = document.querySelector(".testimonial-nav.prev");
+            const nextBtn = document.querySelector(".testimonial-nav.next");
             let currentIndex = 0;
             const total = cards.length;
 
             function updateSlider() {
-              slider.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+              slider.style.transform =
+                "translateX(" + -currentIndex * 100 + "%)";
             }
 
-            prevBtn.addEventListener('click', function() {
-              currentIndex = (currentIndex === 0) ? total - 1 : currentIndex - 1;
+            prevBtn.addEventListener("click", function () {
+              currentIndex = currentIndex === 0 ? total - 1 : currentIndex - 1;
               updateSlider();
             });
 
-            nextBtn.addEventListener('click', function() {
-              currentIndex = (currentIndex === total - 1) ? 0 : currentIndex + 1;
+            nextBtn.addEventListener("click", function () {
+              currentIndex = currentIndex === total - 1 ? 0 : currentIndex + 1;
               updateSlider();
             });
 
             // Touch swipe for mobile
-            let startX = 0, isDragging = false;
-            slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging=true; });
-            slider.addEventListener('touchend', e => { isDragging=false; });
-            slider.addEventListener('touchmove', function(e) {
+            let startX = 0,
+              isDragging = false;
+            slider.addEventListener("touchstart", (e) => {
+              startX = e.touches[0].clientX;
+              isDragging = true;
+            });
+            slider.addEventListener("touchend", (e) => {
+              isDragging = false;
+            });
+            slider.addEventListener("touchmove", function (e) {
               if (!isDragging) return;
               let diff = e.touches[0].clientX - startX;
               if (Math.abs(diff) > 60) {
@@ -915,7 +981,7 @@
             });
 
             // Keyboard navigation
-            slider.parentNode.addEventListener('keydown', function(e) {
+            slider.parentNode.addEventListener("keydown", function (e) {
               if (e.key === "ArrowRight" || e.key === "d") nextBtn.click();
               if (e.key === "ArrowLeft" || e.key === "a") prevBtn.click();
             });
@@ -993,35 +1059,36 @@
 
     <!-- New JS for hamburger menu toggle -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
 
-        hamburger.addEventListener('click', function() {
-          const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-          this.setAttribute('aria-expanded', !expanded);
-          this.classList.toggle('active');
-          navLinks.classList.toggle('open');
+        hamburger.addEventListener("click", function () {
+          const expanded =
+            this.getAttribute("aria-expanded") === "true" || false;
+          this.setAttribute("aria-expanded", !expanded);
+          this.classList.toggle("active");
+          navLinks.classList.toggle("open");
           // Optional: prevent body scroll when nav open on mobile
-          if(navLinks.classList.contains('open')){
-            document.body.style.overflow = 'hidden';
+          if (navLinks.classList.contains("open")) {
+            document.body.style.overflow = "hidden";
           } else {
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
           }
         });
 
         // Close menu when a link is clicked (optional for UX)
-        navLinks.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            if(navLinks.classList.contains('open')){
+        navLinks.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (navLinks.classList.contains("open")) {
               hamburger.click();
             }
           });
         });
 
         // Close menu with ESC key (accessibility)
-        document.addEventListener('keydown', (e) => {
-          if(e.key === "Escape" && navLinks.classList.contains('open')){
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && navLinks.classList.contains("open")) {
             hamburger.click();
             hamburger.focus();
           }

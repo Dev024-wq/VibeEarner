@@ -172,6 +172,106 @@
           transform: translateY(2px);
         }
       }
+
+      /* Responsive Navbar Styles */
+
+      /* Hide original nav-links on small screens */
+      @media (max-width: 480px) {
+        .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 10000;
+          padding-top: 4.5rem; /* To clear header */
+        }
+        .navbar.active {
+          transform: translateX(0);
+        }
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          padding-left: 1.5rem;
+        }
+        .nav-links li a {
+          font-size: 1.25rem;
+        }
+        /* Hide nav-links in header since the navbar slides in */
+        .navbar:not(.active) ul {
+          pointer-events: none;
+        }
+
+        /* Hamburger button */
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 24px;
+          cursor: pointer;
+          background: transparent;
+          border: none;
+          margin-right: 1rem;
+          z-index: 11000;
+        }
+        .hamburger:focus {
+          outline: 2px solid var(--primary-color);
+          outline-offset: 2px;
+        }
+        .hamburger div {
+          width: 30px;
+          height: 3px;
+          background-color: var(--primary-color);
+          border-radius: 2px;
+          transition: all 0.3s linear;
+          position: relative;
+          transform-origin: 1px;
+        }
+
+        /* Animate hamburger to "X" when active */
+        .hamburger.active div:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        .hamburger.active div:nth-child(2) {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        .hamburger.active div:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        /* Hide original navbar in header */
+        header .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 9999;
+          padding-top: 4.5rem;
+        }
+      }
+
+      /* Show hamburger only on mobile */
+      .hamburger {
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .hamburger {
+          display: flex;
+        }
+      }
     </style>
   </head>
   <body>
@@ -184,7 +284,25 @@
         <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
         <span class="visually-hidden">VibeEarning</span>
       </a>
-      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+
+      <!-- Hamburger Toggle Button for Mobile -->
+      <button
+        class="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+
+      <nav
+        class="navbar"
+        role="navigation"
+        aria-label="Primary navigation"
+        id="primary-navigation"
+      >
         <ul class="nav-links" role="menubar">
           <li role="none">
             <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
@@ -297,6 +415,18 @@
         }
       }
       window.addEventListener("keydown", handleFirstTab);
+
+      // Responsive navigation hamburger toggle
+      const hamburger = document.querySelector(".hamburger");
+      const navbar = document.querySelector(".navbar");
+
+      hamburger.addEventListener("click", () => {
+        const expanded =
+          hamburger.getAttribute("aria-expanded") === "true" || false;
+        hamburger.setAttribute("aria-expanded", !expanded);
+        hamburger.classList.toggle("active");
+        navbar.classList.toggle("active");
+      });
     </script>
     <script>
       // Waits two minutes, then sends a "real visitor" ping to backend
