@@ -444,77 +444,101 @@
         }
       }
 
-      /* New styles for responsive mobile nav with hamburger */
-      /* Hide hamburger by default */
-      .hamburger {
-        display: none;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 28px;
-        height: 24px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        z-index: 10001;
-      }
-      .hamburger:focus {
-        outline: 3px solid var(--primary-color);
-        outline-offset: 2px;
-      }
-      .hamburger div {
-        width: 28px;
-        height: 3px;
-        background: var(--primary-color);
-        border-radius: 2px;
-        transition: all 0.3s ease;
-      }
-      /* Hamburger active state */
-      .hamburger.active div:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-      .hamburger.active div:nth-child(2) {
-        opacity: 0;
-      }
-      .hamburger.active div:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-      }
-
-      /* On screens ≤480px, hide nav links and show hamburger */
+      /* Hide original nav-links on small screens */
       @media (max-width: 480px) {
-        .nav-links {
+        .navbar {
           position: fixed;
           top: 0;
           right: 0;
           height: 100vh;
-          width: 280px;
-          background-color: var(--background-white);
-          flex-direction: column;
-          gap: 1.5rem;
-          padding-top: 6rem;
-          box-shadow: -6px 0 18px rgba(0, 0, 0, 0.1);
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
           transform: translateX(100%);
-          transition: transform 0.3s ease var(--ease-curve);
+          transition: transform 0.3s ease-in-out;
           z-index: 10000;
+          padding-top: 4.5rem; /* To clear header */
         }
-        .nav-links.open {
+        .navbar.active {
           transform: translateX(0);
         }
-        .nav-links li {
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
           padding-left: 1.5rem;
         }
-        .nav-links a {
+        .nav-links li a {
           font-size: 1.25rem;
-          padding: 0.75rem 0;
-          display: block;
         }
-        /* Show hamburger button */
+        /* Hide nav-links in header since the navbar slides in */
+        .navbar:not(.active) ul {
+          pointer-events: none;
+        }
+
+        /* Hamburger button */
         .hamburger {
           display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 24px;
+          cursor: pointer;
+          background: transparent;
+          border: none;
+          margin-right: 1rem;
+          z-index: 11000;
         }
-        /* Navbar padding - reduce */
-        .navbar {
-          padding: 0 1rem;
+        .hamburger:focus {
+          outline: 2px solid var(--primary-color);
+          outline-offset: 2px;
+        }
+        .hamburger div {
+          width: 30px;
+          height: 3px;
+          background-color: var(--primary-color);
+          border-radius: 2px;
+          transition: all 0.3s linear;
+          position: relative;
+          transform-origin: 1px;
+        }
+
+        /* Animate hamburger to "X" when active */
+        .hamburger.active div:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        .hamburger.active div:nth-child(2) {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        .hamburger.active div:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        /* Hide original navbar in header */
+        header .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 9999;
+          padding-top: 4.5rem;
+        }
+      }
+
+      /* Show hamburger only on mobile */
+      .hamburger {
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .hamburger {
+          display: flex;
         }
       }
     </style>

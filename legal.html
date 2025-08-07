@@ -184,6 +184,114 @@
           transform: translateY(2px);
         }
       }
+
+      /* Responsive Styles and Hamburger Menu */
+
+      /* Variables fallback */
+      :root {
+        --primary-color: #8a2be2; /* Fallback purple */
+        --secondary-color: #6a0dad;
+        --primary-hover: #7a1fde;
+        --text-dark: #222;
+        --background-white: #fff;
+        --text-muted: #666;
+      }
+
+      /* Hide default nav on mobile */
+      @media (max-width: 480px) {
+        .navbar {
+          position: fixed;
+          top: 0;
+          left: -250px;
+          width: 250px;
+          height: 100vh;
+          background: var(--background-white);
+          box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+          display: flex;
+          flex-direction: column;
+          padding: 4rem 1rem 1rem;
+          transition: left 0.35s ease;
+          z-index: 10000;
+        }
+
+        .navbar.open {
+          left: 0;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          gap: 1.2rem;
+        }
+        .nav-links li a {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-dark);
+        }
+
+        /* Overlay when menu is open */
+        body.menu-open::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.3);
+          z-index: 9999;
+        }
+
+        /* Hamburger Button */
+        #hamburgerBtn {
+          display: flex;
+          position: fixed;
+          top: 15px;
+          right: 15px;
+          width: 38px;
+          height: 30px;
+          flex-direction: column;
+          justify-content: space-around;
+          cursor: pointer;
+          z-index: 11000;
+          background: transparent;
+          border: none;
+          padding: 0;
+          outline: none;
+        }
+
+        #hamburgerBtn span {
+          display: block;
+          width: 100%;
+          height: 4px;
+          background: var(--primary-color);
+          border-radius: 4px;
+          transition: all 0.3s ease;
+          transform-origin: center;
+        }
+
+        /* Animate hamburger to X when open */
+        #hamburgerBtn.open span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+        #hamburgerBtn.open span:nth-child(2) {
+          opacity: 0;
+        }
+        #hamburgerBtn.open span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Hide original logo margin if needed on mobile */
+        .header {
+          position: relative;
+          padding: 0 1rem;
+        }
+      }
+
+      /* On larger screens, show normal nav */
+      @media (min-width: 481px) {
+        #hamburgerBtn {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -196,7 +304,25 @@
         <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
         <span class="visually-hidden">VibeEarning</span>
       </a>
-      <nav class="navbar" role="navigation" aria-label="Primary navigation">
+
+      <!-- Hamburger menu button for mobile -->
+      <button
+        id="hamburgerBtn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav
+        class="navbar"
+        role="navigation"
+        aria-label="Primary navigation"
+        id="primary-navigation"
+      >
         <ul class="nav-links" role="menubar">
           <li role="none">
             <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
@@ -297,8 +423,39 @@
         }
       }
       window.addEventListener("keydown", handleFirstTab);
-    </script>
-    <script>
+
+      // Hamburger menu toggle functionality for mobile navigation
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const navbar = document.querySelector(".navbar");
+
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = navbar.classList.toggle("open");
+        hamburgerBtn.classList.toggle("open");
+        hamburgerBtn.setAttribute("aria-expanded", isOpen);
+        // Add/remove class to body to enable overlay for accessibility
+        if (isOpen) {
+          document.body.classList.add("menu-open");
+          // Trap focus inside nav when open (optional enhancement)
+          // You could add focus trap code here if needed
+        } else {
+          document.body.classList.remove("menu-open");
+        }
+      });
+
+      // Clicking outside nav closes menu on mobile
+      document.addEventListener("click", (e) => {
+        if (
+          !navbar.contains(e.target) &&
+          !hamburgerBtn.contains(e.target) &&
+          navbar.classList.contains("open")
+        ) {
+          navbar.classList.remove("open");
+          hamburgerBtn.classList.remove("open");
+          hamburgerBtn.setAttribute("aria-expanded", false);
+          document.body.classList.remove("menu-open");
+        }
+      });
+
       // Waits two minutes, then sends a "real visitor" ping to backend
       setTimeout(function () {
         fetch("real_visit.php", { method: "POST" }).catch(() => {});
