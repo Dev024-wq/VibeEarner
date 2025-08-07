@@ -3,29 +3,772 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VibeEarning – Your Path to Prosperity as an LIC Agent</title>
+  <title>VibeEarning – Your Path to Prosperity as a LIC Agent</title>
   <meta
     name="description"
-    content="Join VibeEarning and discover how to become a successful LIC agent with financial freedom, flexible hours, and growth opportunities. Learn the official process and benefits."
+    content="Join VibeEarning and discover how to become a successful LIC agent with financial freedom, flexible hours, and growth opportunities."
   />
-  <!-- Link to external advanced CSS -->
-  <link rel="stylesheet" href="assets/styles.css" />
-</head>
+  <style>
+    /* CSS Variables */
+    :root {
+      --primary-color: #8a2be2;
+      --primary-hover: #6a1bc4;
+      --secondary-color: #ff9800;
+      --background-light: #f5f7fa;
+      --background-white: #fff;
+      --text-dark: #333;
+      --text-muted: #666;
+      --shadow-light: rgba(0, 0, 0, 0.05);
+      --shadow-strong: rgba(0, 0, 0, 0.2);
+      --transition-speed: 0.35s;
+      --border-radius: 25px;
+      --max-width: 1200px;
+      --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --ease-curve: cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
+    /* Reset and base */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    body {
+      font-family: var(--font-family-base);
+      line-height: 1.6;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color var(--transition-speed) var(--ease-curve);
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .visually-hidden {
+      position: absolute !important;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 0 !important;
+      border: 0 !important;
+      height: 1px !important;
+      width: 1px !important;
+      overflow: hidden;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      font-weight: 700;
+      border-radius: var(--border-radius);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-speed) var(--ease-curve);
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      border: none;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 10px var(--shadow-light);
+      will-change: transform, box-shadow;
+    }
+    .btn:focus-visible,
+    .btn:hover {
+      outline: none;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px var(--shadow-strong);
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--background-white);
+      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      box-shadow: 0 10px 25px rgba(106, 27, 196, 0.6);
+    }
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      box-shadow: none;
+      transition: color var(--transition-speed) var(--ease-curve),
+        background-color var(--transition-speed) var(--ease-curve),
+        border-color var(--transition-speed) var(--ease-curve);
+    }
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: var(--background-white);
+      border-color: var(--primary-hover);
+      box-shadow: 0 6px 15px rgba(138, 43, 226, 0.35);
+    }
+    /* Advanced button shine effect */
+    .btn-primary::before,
+    .btn-outline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      transition: 0.7s ease;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+    }
+    .btn-primary:hover::before,
+    .btn-outline:hover::before {
+      left: 125%;
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--background-white);
+      padding: 1rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      transition: background-color 0.3s;
+    }
+    .logo img {
+      height: 75px;
+      width: auto;
+      margin-right: 15px;
+      transition: transform 0.3s var(--ease-curve);
+    }
+    .logo img:hover,
+    .logo img:focus {
+      transform: scale(1.1);
+    }
+    .navbar {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .nav-links a {
+      color: #444;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.25em 0.5em;
+      transition: color var(--transition-speed) var(--ease-curve);
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--primary-color);
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+    .nav-links a[aria-current="page"] {
+      color: var(--primary-color);
+      pointer-events: none;
+      font-weight: 700;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    /* Hamburger menu button (hidden on desktop) */
+    #menuToggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: none;
+      color: var(--primary-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4rem 2rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #f8eaff 0%, #e1f8ff 100%);
+      box-shadow: 0 10px 40px var(--shadow-light);
+      animation: fadeInUp 1.2s ease forwards;
+      overflow: hidden;
+    }
+    .hero .hero-content {
+      max-width: 600px;
+      animation: slideInLeft 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: var(--primary-color);
+      text-shadow: 0 2px 5px rgba(138, 43, 226, 0.3);
+    }
+    .hero .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+    .hero .hero-content .btn-primary {
+      font-size: 1.125rem;
+    }
+    .hero .hero-image {
+      border-radius: 50%;
+      width: 320px;
+      height: 320px;
+      box-shadow: 0 8px 32px var(--shadow-light);
+      animation: scaleUp 1s ease forwards;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .hero .hero-image:hover img {
+      transform: scale(1.05);
+      filter: saturate(1.1);
+    }
+    .badge {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: var(--secondary-color);
+      color: #fff;
+      padding: 0.5em 1.25em;
+      border-radius: 25px 0 0 0;
+      font-weight: 700;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      user-select: none;
+      pointer-events: none;
+      letter-spacing: 0.03em;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      margin: 4rem 0;
+      padding: 2rem;
+      background: linear-gradient(
+        100deg,
+        var(--background-light),
+        #e8f3ff 100%
+      );
+      border-radius: 24px;
+      box-shadow: 0 6px 38px var(--shadow-light);
+    }
+    .stats-section .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+    }
+    .stats-section .stat-box {
+      flex: 1 1 220px;
+      min-width: 210px;
+      background: var(--background-white);
+      border-radius: 18px;
+      box-shadow: 0 5px 22px var(--shadow-light);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin: auto 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .stats-section .stat-box:hover,
+    .stats-section .stat-box:focus-visible {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 34px var(--shadow-strong);
+      outline: none;
+      z-index: 2;
+    }
+    .stats-section .stat-box .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 0.4rem;
+    }
+    .stats-section .stat-box .stat-label {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+    .stats-section .stat-box .stat-desc {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* How To Join Section */
+    .how-to-join {
+      margin: 2rem auto 4rem;
+      max-width: 900px;
+    }
+    .how-to-join h2 {
+      color: var(--primary-color);
+      font-weight: 800;
+      font-size: 2.4rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .join-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+    .join-grid .join-step {
+      flex: 1 1 220px;
+      background: var(--background-white);
+      padding: 2rem 1.2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px var(--shadow-light);
+      cursor: default;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      user-select: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .join-grid .join-step:hover,
+    .join-grid .join-step:focus-visible {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow: 0 14px 40px var(--shadow-strong);
+      outline: none;
+      z-index: 2;
+    }
+    .join-step .join-icon {
+      font-size: 2rem;
+      font-weight: 900;
+      background-image: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--secondary-color)
+      );
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px var(--primary-color);
+      user-select: none;
+    }
+    .join-step strong {
+      color: var(--primary-color);
+      font-size: 1.1rem;
+    }
+    .join-step p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      line-height: 1.3;
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      margin: 4rem auto 6rem;
+      max-width: 1100px;
+    }
+    .benefits-section .benefits-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .benefits-section h2 {
+      color: var(--primary-color);
+      font-weight: 900;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
+    }
+    .benefits-section .benefit {
+      background: var(--background-white);
+      flex: 1 1 240px;
+      max-width: 310px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px var(--shadow-light);
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: default;
+      user-select: none;
+      color: var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .benefits-section .benefit:hover,
+    .benefits-section .benefit:focus-visible {
+      outline: none;
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 18px 48px var(--shadow-strong);
+      color: var(--secondary-color);
+      z-index: 2;
+    }
+    .benefits-section .benefit .benefit-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .benefits-section .benefit .benefit-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Scroll To Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 3rem;
+      right: 3rem;
+      background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+      );
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+      z-index: 99999;
+      opacity: 0.85;
+      display: none;
+      user-select: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .scroll-to-top:hover,
+    .scroll-to-top:focus {
+      outline: none;
+      opacity: 1;
+      transform: translateY(-5px) scale(1.1) rotate(-10deg);
+      box-shadow: 0 18px 42px rgba(138, 43, 226, 0.6);
+      background: linear-gradient(
+        120deg,
+        var(--secondary-color),
+        var(--primary-color)
+      );
+    }
+    .scroll-to-top .arrow-up {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 26px solid #fff;
+      margin-bottom: 4px;
+      animation: arrowBounce 2s infinite linear;
+    }
+    @keyframes arrowBounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes scaleUp {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive for tablets and small desktops */
+    @media (max-width: 900px) {
+      .container {
+        width: 95%;
+      }
+      .hero {
+        flex-direction: column;
+        padding: 3rem 1.25rem;
+      }
+      .hero .hero-content {
+        max-width: 100%;
+        text-align: center;
+        animation: slideInLeft 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .hero .hero-image {
+        margin-top: 2rem;
+        width: 240px;
+        height: 240px;
+        animation: scaleUp 0.9s ease forwards;
+      }
+      .stats-section .stats-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .stats-section .stat-box {
+        flex: 1 1 240px;
+        min-width: 200px;
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+      .join-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .join-grid .join-step {
+        max-width: 100%;
+      }
+      .benefits-section {
+        padding: 1rem 1rem 3rem;
+        margin-bottom: 3rem;
+      }
+      .benefits-section .benefits-grid {
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 90%;
+        margin: 0 auto;
+      }
+      .benefits-section .benefit {
+        max-width: 100%;
+      }
+      .scroll-to-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.6rem;
+        padding: 0.6rem 0.75rem;
+      }
+    }
+
+    /* Mobile View for smaller devices */
+    @media (max-width: 480px) {
+      .header {
+        padding: 0.75rem 1rem;
+      }
+      .logo img {
+        height: 50px;
+        margin-right: 8px;
+      }
+      /* Show hamburger and hide nav links by default */
+      #menuToggle {
+        display: block;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 0.9rem;
+        background-color: var(--background-white);
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 180px;
+        padding: 1rem;
+        box-shadow: 0 4px 15px var(--shadow-strong);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 10001;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+      }
+      .nav-links.open {
+        transform: translateX(0);
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        padding: 0.5em 0;
+        display: block;
+        border-bottom: 1px solid #eee;
+      }
+      .hero {
+        padding: 2rem 1rem;
+        flex-direction: column;
+      }
+      .hero .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .hero .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero .hero-image {
+        width: 180px;
+        height: 180px;
+        margin-top: 1.5rem;
+      }
+      .stats-section {
+        padding: 1.2rem;
+        margin: 3rem 0;
+      }
+      .stats-section .stats-grid {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: center;
+      }
+      .stats-section .stat-box {
+        width: 90%;
+        min-width: unset;
+        flex: none;
+        margin-bottom: 1rem;
+      }
+      .how-to-join {
+        padding: 0 1rem;
+        max-width: 100%;
+      }
+      .join-grid {
+        gap: 1rem;
+      }
+      .join-grid .join-step {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 1.5rem 1rem;
+      }
+      .join-step .join-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        box-shadow: 0 0 8px var(--primary-color);
+      }
+      .join-step strong {
+        font-size: 1rem;
+        display: block;
+        margin-top: 0.5rem;
+      }
+      .join-step p {
+        font-size: 0.875rem;
+        margin-top: 0.3rem;
+      }
+      .benefits-section {
+        padding: 1rem;
+        max-width: 100%;
+        margin: 3rem 0 5rem;
+      }
+      .benefits-section .benefits-grid {
+        gap: 1.5rem;
+        justify-content: center;
+      }
+      .benefits-section .benefit {
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+      }
+      .scroll-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+        padding: 0.5rem 0.6rem;
+      }
+    }
+  </style>
+</head>
 <body>
-  <!-- Header: full width, no container -->
+  <!-- Header -->
   <header class="header flex-between" role="banner">
-    <a
-      href="index.html"
-      class="logo flex-center"
-      aria-label="VibeEarning Home"
-    >
-      <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
+    <a href="index.html" class="logo flex-center" aria-label="VibeEarning Home">
+      <img src="assets/img/logo.png" alt="VibeEarning Logo" />
       <span class="visually-hidden">VibeEarning</span>
     </a>
 
+    <!-- Hamburger toggle button for mobile -->
+    <button
+      id="menuToggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="primary-menu"
+      type="button"
+    >
+      ☰
+    </button>
+
     <nav class="navbar" role="navigation" aria-label="Primary navigation">
-      <ul class="nav-links" role="menubar">
+      <ul id="primary-menu" class="nav-links" role="menubar">
         <li role="none">
           <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
         </li>
@@ -42,260 +785,192 @@
     </nav>
   </header>
 
-  <!-- Main content wrapper with animation class -->
-  <main role="main">
+  <!-- Main content -->
+  <main>
     <div class="container page-animate">
-      <!-- Hero section -->
-      <section
-        class="hero fade-in flex-between"
-        aria-labelledby="hero-title"
-        aria-describedby="hero-desc"
-      >
-        <div class="hero-content slide-in-left" style="max-width: 580px">
-          <h1 id="hero-title" class="hero-content__title">
-            Make Your Vibe, Earn Your Way: Become an LIC Agent
-          </h1>
-          <p id="hero-desc" class="hero-content__desc">
-            Unlock financial freedom, respect, and a flexible lifestyle. LIC
-            agents empower India and thrive.
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-content" role="main">
+          <h1 id="hero-title">Make Your Vibe, Earn Your Way: A LIC Agent</h1>
+          <p id="hero-desc">
+            Unlock financial freedom, respect, and flexibility. LIC agents empower India.
           </p>
           <a
+            class="btn btn-primary"
             href="join.html"
-            class="btn btn-primary hero-content__cta"
             role="button"
+            aria-describedby="hero-desc"
+            >Start Your Journey</a
           >
-            Start Your Journey
-          </a>
         </div>
-        <div class="hero-image scale-up" aria-hidden="true">
-          <img
-            src="assets/img/owner.png"
-            alt="Photo of website owner and LIC agent"
-          />
-          <div class="badge" aria-label="Top LIC Agent Badge"></div>
+
+        <div class="hero-image" aria-hidden="true">
+          <img src="assets/img/owner.png" alt="Photo of the website owner lic agent" />
+          <div class="badge" aria-label="Top Agent Badge"></div>
         </div>
       </section>
 
-      <!-- Stats Section (FIXED & CONSISTENT!) -->
-      <section
-        class="stats-section page-animate"
-        aria-label="Website Statistics"
-      >
-        <div
-          class="stats-grid"
-          style="
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-          "
-        >
-          <div
-            class="stat-box"
-            style="
-              min-width: 190px;
-              max-width: 220px;
-              min-height: 120px;
-              flex: 1;
-            "
-            tabindex="0"
-            aria-label="Years of Experience"
-          >
+      <!-- Stats -->
+      <section class="stats-section" aria-label="Statistics">
+        <div class="stats-grid">
+          <div class="stat-box" tabindex="0" aria-label="Years of Experience">
             <span class="stat-number">15+</span>
             <span class="stat-label">Years of Experience</span>
-            <span class="stat-desc">Trusted in the industry</span>
+            <span class="stat-desc">Trusted in the Industry</span>
           </div>
-          <div
-            class="stat-box"
-            style="
-              min-width: 190px;
-              max-width: 220px;
-              min-height: 120px;
-              flex: 1;
-            "
-            tabindex="0"
-            aria-label="Sum Assured Handling"
-          >
+          <div class="stat-box" tabindex="0" aria-label="Sum Assured">
             <span class="stat-number">230CR+</span>
             <span class="stat-label">Sum Assured Handling</span>
-            <span class="stat-desc">Financial protection provided</span>
+            <span class="stat-desc">Financial Protection</span>
           </div>
-          <div
-            class="stat-box"
-            style="
-              min-width: 190px;
-              max-width: 220px;
-              min-height: 120px;
-              flex: 1;
-            "
-            tabindex="0"
-            aria-label="Customer Satisfaction"
-          >
+          <div class="stat-box" tabindex="0" aria-label="Customer Satisfaction">
             <span class="stat-number">5★</span>
             <span class="stat-label">Customer Satisfaction</span>
-            <span class="stat-desc">5-star feedback from real clients</span>
+            <span class="stat-desc">5 Star Feedback</span>
           </div>
-          <div
-            class="stat-box"
-            style="
-              min-width: 190px;
-              max-width: 220px;
-              min-height: 120px;
-              flex: 1;
-            "
-            tabindex="0"
-            aria-label="Successful Licenses"
-          >
+          <div class="stat-box" tabindex="0" aria-label="Successful Licenses">
             <span class="stat-number">40+</span>
             <span class="stat-label">Successful Licenses</span>
             <span class="stat-desc">Agents enrolled through us</span>
           </div>
-          <div
-            class="stat-box"
-            style="
-              min-width: 190px;
-              max-width: 220px;
-              min-height: 120px;
-              flex: 1;
-            "
-            tabindex="0"
-            aria-label="Website Visitors"
-          >
+          <div class="stat-box" tabindex="0" aria-label="Website Visitors">
             <span class="stat-number" id="visitors-count">—</span>
             <span class="stat-label">Website Visitors</span>
-            <span class="stat-desc">People have explored our site</span>
+            <span class="stat-desc">People Explored</span>
           </div>
         </div>
       </section>
 
-      <!-- How to Join Section -->
-      <section
-        class="how-to-join page-animate"
-        aria-labelledby="join-steps-title"
-        style="margin-top: 3rem"
-      >
-        <h2
-          id="join-steps-title"
-          class="text-center text-2xl font-bold mb-8"
-          style="color: var(--primary-color)"
-        >
-          How to Join as an LIC Agent
-        </h2>
+      <!-- Join Steps -->
+      <section class="how-to-join">
+        <h2>How to Join</h2>
         <div class="join-grid">
           <div class="join-step">
             <div class="join-icon">1</div>
             <div>
-              <strong>Check Your Eligibility</strong>
-              <p>
-                Minimum age 18, 10th pass, Indian citizenship (as per Agents’
-                Regulations, 2017).
-              </p>
+              <strong>Check Eligibility</strong>
+              <p>Minimum 18 years, 10th pass, Indian citizenship.</p>
             </div>
           </div>
           <div class="join-step">
             <div class="join-icon">2</div>
             <div>
-              <strong>Complete Official Training</strong>
-              <p>Attend LIC’s authorized pre-recruitment program.</p>
+              <strong>Complete Training</strong>
+              <p>Attend LIC's authorized prep program.</p>
             </div>
           </div>
           <div class="join-step">
             <div class="join-icon">3</div>
             <div>
-              <strong>Pass IRDAI Exam</strong>
-              <p>Clear the IC-38 examination for agent licensing.</p>
+              <strong>Pass Exam</strong>
+              <p>Complete IRDAI exam.</p>
             </div>
           </div>
           <div class="join-step">
             <div class="join-icon">4</div>
             <div>
-              <strong>Interview and Onboarding</strong>
-              <p>Attend LIC branch interview and begin your journey.</p>
+              <strong>Interview & Onboard</strong>
+              <p>Join after interview and onboarding.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Benefits Section -->
-      <section
-        class="benefits-section page-animate"
-        aria-labelledby="benefits-title"
-        style="margin-top: 3.5rem"
-      >
-        <h2 id="benefits-title" class="text-center benefits-main-title mb-10">
-          Why LIC Agency?
-        </h2>
-        <div class="benefits-grid" role="list">
-          <div class="benefit" role="listitem">
-            <span class="benefit-title">Unlimited Earning Potential</span>
-            <span class="benefit-desc"
-              >Earn based on your effort, not hierarchy.</span
-            >
+      <!-- Benefits -->
+      <section class="benefits-section">
+        <h2 class="benefits-title">Why Join LIC Agency</h2>
+        <div class="benefits-grid">
+          <div class="benefit">
+            <div class="benefit-title">Unlimited Earnings</div>
+            <div class="benefit-desc">Earn according to your effort.</div>
           </div>
-          <div class="benefit" role="listitem">
-            <span class="benefit-title">Long-Term Renewal Income</span>
-            <span class="benefit-desc"
-              >Build client relationships that pay off for years.</span
-            >
+          <div class="benefit">
+            <div class="benefit-title">Long-lasting Income</div>
+            <div class="benefit-desc">Renewals pay over years.</div>
           </div>
-          <div class="benefit" role="listitem">
-            <span class="benefit-title">Flexible Hours</span>
-            <span class="benefit-desc"
-              >Be your own boss and work on your terms.</span
-            >
+          <div class="benefit">
+            <div class="benefit-title">Flexible Hours</div>
+            <div class="benefit-desc">Be your own boss.</div>
           </div>
-          <div class="benefit" role="listitem">
-            <span class="benefit-title">Growth Opportunities</span>
-            <span class="benefit-desc"
-              >Nationwide recognition and career advancement.</span
-            >
+          <div class="benefit">
+            <div class="benefit-title">Growth</div>
+            <div class="benefit-desc">Recognition & advancement.</div>
           </div>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Footer full width -->
-  <footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
-    <p>
-      &copy; 2025 VibeEarning. This is an educational site focused on LIC
-      agency recruitment and is not an official LIC property.
-    </p>
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container text-center">
+      <p>
+        &copy; 2025 VibeEarning. This is an educational site focused on LIC agency recruitment and is not an official LIC property.
+      </p>
+    </div>
   </footer>
 
-  <!-- Scroll to Top Button -->
+  <!-- Scroll To Top Button -->
   <button
-    id="scrollToTopBtn"
-    title="Go to top"
-    aria-label="Scroll to top"
+    id="scrollToTop"
     class="scroll-to-top"
-    hidden
+    aria-label="Scroll to top"
+    title="Scroll to top"
+    type="button"
   >
     <span class="arrow-up"></span>
   </button>
 
-  <!-- Link to external JavaScript -->
+  <!-- Scripts -->
   <script src="assets/main.js" defer></script>
   <script>
-    // Waits two minutes, then sends a "real visitor" ping to backend
-    setTimeout(function () {
-      fetch("real_visit.php", { method: "POST" }).catch(() => {});
-    }, 2 * 60 * 1000);
-
-    // Loads and displays "real visitor" count with error handling
-    function updateRealVisitorStat() {
+    // Visitor count updater
+    function updateVisitorCount() {
       fetch("real_visit.php")
-        .then((resp) => (resp.ok ? resp.text() : Promise.resolve("—")))
-        .then((count) => {
-          document.getElementById("visitors-count").textContent = /^\d+$/.test(count.trim()) ? count : "—";
+        .then((res) => (res.ok ? res.text() : Promise.resolve("—")))
+        .then((text) => {
+          const count = text.trim();
+          document.getElementById("visitors-count").textContent =
+            /^\d+$/.test(count) ? count : "—";
         })
         .catch(() => {
           document.getElementById("visitors-count").textContent = "—";
         });
     }
-    // Call it right away and every 40s to keep stat fresh
-    updateRealVisitorStat();
-    setInterval(updateRealVisitorStat, 40000);
+    updateVisitorCount();
+    setInterval(updateVisitorCount, 40000);
+
+    // Scroll to top button toggle
+    const scrollBtn = document.getElementById("scrollToTop");
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 200) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    });
+    scrollBtn.addEventListener("click", () => {
+      scrollBtn.animate(
+        [
+          { transform: "rotate(0deg) scale(1)" },
+          { transform: "rotate(360deg) scale(1.2)" },
+          { transform: "rotate(385deg) scale(0.95)" },
+          { transform: "rotate(360deg) scale(1)" },
+        ],
+        { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
+      );
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("primary-menu");
+
+    menuToggle.addEventListener("click", () => {
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+      navLinks.classList.toggle("open");
+    });
   </script>
 </body>
 </html>

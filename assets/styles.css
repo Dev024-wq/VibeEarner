@@ -224,6 +224,18 @@ body {
   color: var(--primary-hover);
 }
 
+/* Responsive mobile adjustments for VibeEarning site */
+
+@media (max-width: 900px) {
+  /* Container padding */
+  .container {
+    width: 95%;
+    padding: 0 1rem;
+  }
+
+  /* Hero Section: stack vertically */
+
+
 /* Hero Section */
 .hero {
   display: flex;
@@ -1580,4 +1592,5 @@ body:not(.user-is-tabbing) button:focus {
   .benefit {
     min-width: 100%;
   }
+}
 }
