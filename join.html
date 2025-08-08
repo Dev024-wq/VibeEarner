@@ -6,7 +6,6 @@
   <title>Join as an LIC Agent — VibeEarning</title>
   <meta name="description" content="How to join LIC as agent with quick steps and contact form" />
   <style>
-    /* CSS Variables */
     :root {
       --primary-color: #8a2be2;
       --primary-hover: #6a1bc4;
@@ -24,14 +23,17 @@
       --ease-curve: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Reset & Base */
     *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
       font-size: 16px;
     }
+
     body {
       font-family: var(--font-family-base);
       line-height: 1.6;
@@ -43,18 +45,34 @@
       overflow-x: hidden;
       margin: 0;
     }
-    a { text-decoration: none; color: inherit; }
 
-    /* Utility */
-    .flex-center { display: flex; align-items: center; justify-content: center; }
-    .flex-between { display: flex; align-items: center; justify-content: space-between; }
-    .visually-hidden {
-      position: absolute !important;
-      clip: rect(1px,1px,1px,1px);
-      width:1px; height:1px; overflow:hidden; padding:0; border:0;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* Buttons */
+    .flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      clip: rect(1px, 1px, 1px, 1px);
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+    }
+
     .btn {
       display: inline-block;
       padding: 0.75rem 1.75rem;
@@ -62,55 +80,75 @@
       border-radius: var(--border-radius);
       cursor: pointer;
       transition: all var(--transition-speed) var(--ease-curve);
-      position: relative; overflow: hidden; user-select: none; border: none;
-      font-size: 1rem; letter-spacing: 0.04em;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      border: none;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
       box-shadow: 0 4px 10px var(--shadow-light);
     }
-    .btn:hover, .btn:focus-visible {
+
+    .btn:hover,
+    .btn:focus-visible {
       transform: translateY(-3px);
       box-shadow: 0 8px 15px var(--shadow-strong);
       outline: none;
     }
+
     .btn-primary {
       background: var(--primary-color);
       color: #fff;
     }
-    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
     .btn-outline {
       background: transparent;
       color: var(--primary-color);
       border: 2px solid var(--primary-color);
     }
+
     .btn-outline:hover {
       background: var(--primary-color);
       color: #fff;
     }
 
-    /* Header */
     .header {
       background: var(--background-white);
       padding: 1rem;
-      position: sticky; top: 0; z-index: 999;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-      display: flex; justify-content: space-between; align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     .logo img {
       height: 75px;
       transition: transform 0.3s var(--ease-curve);
     }
-    .logo img:hover { transform: scale(1.1); }
 
-    /* Navbar */
-    .navbar {
-      flex: 1;               /* take up remaining space */
-  display: flex;
-  justify-content: center; /* center its contents */
+    .logo img:hover {
+      transform: scale(1.1);
     }
+
+    .navbar {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
     .nav-links {
       list-style: none;
       display: flex;
       gap: 1.5rem;
     }
+
     .nav-links a {
       position: relative;
       padding: 0.25em 0.5em;
@@ -118,16 +156,26 @@
       transition: color var(--transition-speed);
       color: #444;
     }
+
     .nav-links a::after {
       content: "";
       position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
       background: var(--primary-color);
       transition: width 0.3s ease;
     }
-    .nav-links a:hover { color: var(--primary-color); }
-    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
     .nav-links a[aria-current="page"] {
       color: var(--primary-color);
       font-weight: 700;
@@ -135,127 +183,255 @@
       border-bottom: 2px solid var(--primary-color);
     }
 
-    /* Hamburger */
     .hamburger {
       display: none;
-      flex-direction: column; gap: 5px;
-      background: transparent; border: none; cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
+
     .hamburger div {
-      width: 30px; height: 3px;
+      width: 30px;
+      height: 3px;
       background: var(--primary-color);
       border-radius: 2px;
       transition: transform 0.3s ease;
     }
+
     @media (max-width: 768px) {
-      .hamburger { display: flex; }
+      .hamburger {
+        display: flex;
+      }
       .navbar {
-        position: fixed; top: 0; right: 0;
-        height: 100vh; width: 250px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
         background: var(--background-white);
         flex-direction: column;
         padding-top: 4rem;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
       }
-      .navbar.active { transform: translateX(0); }
-      .nav-links { flex-direction: column; padding-left: 1rem; gap: 1.5rem; }
+      .navbar.active {
+        transform: translateX(0);
+      }
+      .nav-links {
+        flex-direction: column;
+        padding-left: 1rem;
+        gap: 1.5rem;
+      }
     }
 
-    /* Fade animations */
     .fade-section {
       opacity: 0;
       transform: translateY(32px) scale(0.98);
       animation: fadeUp 0.95s forwards;
     }
-    .fade-section:nth-child(1) { animation-delay: 0.2s; }
-    .fade-section:nth-child(2) { animation-delay: 0.4s; }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: none; }
+
+    .fade-section:nth-child(1) {
+      animation-delay: 0.2s;
     }
 
-    /* Join Steps */
+    .fade-section:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     .join-section {
       background: linear-gradient(96deg, var(--background-light), #e5f3ff 90%);
-      margin: 2rem auto; padding: 3rem 1rem;
-      max-width: var(--max-width); border-radius: 1rem;
+      margin: 2rem auto;
+      padding: 3rem 1rem;
+      max-width: var(--max-width);
+      border-radius: 1rem;
       box-shadow: 0 8px 24px var(--shadow-light);
     }
+
     .join-section-title {
-      font-size: 2rem; font-weight: 900;
+      font-size: 2rem;
+      font-weight: 900;
       color: var(--primary-color);
-      text-align: center; margin-bottom: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
     }
+
     .card-row {
-      display: flex; flex-wrap: wrap;
-      gap: 1.5rem; justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
     }
+
     .step-card {
       background: var(--background-white);
       border-left: 6px solid var(--primary-color);
-      padding: 1.5rem; border-radius: var(--border-radius);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
       box-shadow: 0 6px 20px var(--shadow-light);
       flex: 1 1 220px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .step-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px var(--shadow-strong);
     }
+
     .step-badge {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       background: var(--secondary-color);
-      color: #fff; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 0.75rem; font-weight: 700;
-    }
-    .step-title {
-      font-size: 1.1rem; color: var(--primary-color);
-      margin-bottom: 0.5rem; font-weight: 800;
-    }
-    .step-desc {
-      color: var(--text-muted); font-size: 0.95rem;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
     }
 
-    /* Form */
-    .join-form-section {
-      background: var(--background-white);
-      margin: 2rem auto; padding: 2.5rem 1rem;
-      max-width: 600px; border-radius: 1rem;
-      box-shadow: 0 8px 26px var(--shadow-light);
-    }
-    .join-form-title {
-      text-align: center; font-size: 1.3rem;
-      color: var(--primary-color); margin-bottom: 1.5rem;
+    .step-title {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
       font-weight: 800;
     }
-    .join-form { display: flex; flex-direction: column; gap: 1rem; }
-    .form-row {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
-    .form-group {
-      flex: 1; display: flex; flex-direction: column;
-    }
-    label {
-      font-weight: 600; color: var(--primary-color);
-      margin-bottom: 0.3rem;
-    }
-    input, textarea {
-      padding: 0.8rem; border: 1px solid #ccc;
-      border-radius: 8px; font-size: 1rem;
-      font-family: inherit;
-    }
-    input:focus, textarea:focus {
-      outline: none; border-color: var(--primary-color);
+
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
-    /* Footer */
+    .join-form-section {
+      background: var(--background-white);
+      margin: 2rem auto;
+      padding: 2.5rem 1rem;
+      max-width: 600px;
+      border-radius: 1rem;
+      box-shadow: 0 8px 26px var(--shadow-light);
+    }
+
+    .join-form-title {
+      text-align: center;
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+    }
+
+    .join-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.3rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
     footer {
       background: var(--background-white);
-      text-align: center; padding: 2rem 1rem;
+      text-align: center;
+      padding: 2rem 1rem;
       margin-top: 2rem;
     }
+
+    /* Scroll to Top Button */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 36px;
+      right: 36px;
+      background: linear-gradient(
+        135deg,
+        var(--primary-color) 65%,
+        var(--secondary-color) 100%
+      );
+      color: white;
+      padding: 0.9rem 1.3rem;
+      border-radius: 55px;
+      font-size: 2rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
+      opacity: 0.85;
+      z-index: 9999;
+      outline: none;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+      display: none;
+    }
+    #scrollToTopBtn:hover,
+    #scrollToTopBtn:focus {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.07) rotate(-7deg);
+      box-shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
+      background: linear-gradient(
+        120deg,
+        var(--secondary-color) 40%,
+        var(--primary-color) 100%
+      );
+    }
+    #scrollToTopBtn span.arrow-up {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 17px solid transparent;
+      border-right: 17px solid transparent;
+      border-bottom: 24px solid #fff;
+      margin-bottom: -3px;
+      animation: arrowUpAnim 2s infinite linear;
+    }
+    @keyframes arrowUpAnim {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      35% {
+        transform: translateY(-3px);
+      }
+      60% {
+        transform: translateY(2px);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -354,6 +530,16 @@
     &copy; 2025 VibeEarning. This is an educational site focused on LIC agency recruitment and is not an official LIC property.
   </footer>
 
+  <!-- Scroll to Top Button -->
+   <button
+    id="scrollToTopBtn"
+    title="Go to top"
+    aria-label="Scroll to top"
+    type="button"
+  >
+    <span class="arrow-up"></span>
+  </button>
+
   <script>
     // Hamburger toggle
     const hamburger = document.querySelector('.hamburger');
@@ -369,6 +555,24 @@
         section.style.opacity = '1';
         section.style.transform = 'none';
       });
+    });
+
+    // Scroll to Top Button Logic
+      const scrollBtn = document.getElementById("scrollToTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
+    });
+    scrollBtn.addEventListener("click", () => {
+      scrollBtn.animate(
+        [
+          { transform: "rotate(0deg) scale(1)" },
+          { transform: "rotate(360deg) scale(1.25)" },
+          { transform: "rotate(390deg) scale(0.96)" },
+          { transform: "rotate(360deg) scale(1)" },
+        ],
+        { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
+      );
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 </body>

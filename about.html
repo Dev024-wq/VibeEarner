@@ -1,1136 +1,1165 @@
-<style>
-  /* CSS Variables for easy theming (optional if you want to keep) */
-  :root {
-    --primary-color: #8a2be2;
-    --primary-hover: #6a1bc4;
-    --secondary-color: #ff9800;
-    --background-light: #f5f7fa;
-    --background-white: #fff;
-    --text-dark: #333;
-    --text-muted: #666;
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    --shadow-strong: rgba(0, 0, 0, 0.2);
-    --transition-speed: 0.35s;
-    --border-radius: 25px;
-    --max-width: 1200px;
-    --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    --ease-curve: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Reset and base */
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-  }
-  body {
-    font-family: var(--font-family-base);
-    line-height: 1.6;
-    background-color: var(--background-light);
-    color: var(--text-dark);
-    min-height: 100vh;
-    overflow-x: hidden;
-    transition: background-color var(--transition-speed) var(--ease-curve);
-  }
-
-  /* Layout helpers */
-  .container {
-    width: 90%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-  .text-center {
-    text-align: center;
-  }
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .visually-hidden {
-    position: absolute !important;
-    clip: rect(1px, 1px, 1px, 1px);
-    padding: 0 !important;
-    border: 0 !important;
-    height: 1px !important;
-    width: 1px !important;
-    overflow: hidden;
-  }
-
-  /* Header & Nav */
-  .header {
-    background-color: var(--background-white);
-    padding: 1rem 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-  }
-  .logo img {
-    height: 75px;
-    margin-right: 15px;
-    transition: transform 0.3s var(--ease-curve);
-  }
-  .logo img:hover,
-  .logo img:focus {
-    transform: scale(1.1);
-  }
-  .navbar {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.25rem;
-  }
-  .nav-links a {
-    text-decoration: none;
-    color: #444;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: color var(--transition-speed) var(--ease-curve);
-    position: relative;
-    padding: 0.25rem 0.5rem;
-  }
-  .nav-links a::after {
-    content: "";
-    display: block;
-    width: 0%;
-    height: 2px;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-  .nav-links a:hover,
-  .nav-links a:focus {
-    color: var(--primary-color);
-  }
-  .nav-links a:hover::after,
-  .nav-links a:focus::after {
-    width: 100%;
-  }
-
-  /* Owner photo styling - larger and interactive */
-  .owner-photo {
-    width: 90px !important;
-    height: 90px !important;
-    max-width: 90vw;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    transition: transform 0.4s ease, filter 0.3s;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .owner-photo:hover,
-  .owner-photo:focus {
-    transform: scale(1.05);
-    filter: saturate(1.1);
-    outline: none;
-  }
-
-  /* Scroll to Top Button: style and animation */
-  #scrollToTopBtn {
-    position: fixed;
-    bottom: 36px;
-    right: 36px;
-    background: linear-gradient(
-      135deg,
-      var(--primary-color) 65%,
-      var(--secondary-color) 100%
-    );
-    color: white;
-    padding: 0.9rem 1.3rem;
-    border-radius: 55px;
-    font-size: 2rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
-    opacity: 0.85;
-    z-index: 9999;
-    outline: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
-    display: none;
-  }
-  #scrollToTopBtn:hover,
-  #scrollToTopBtn:focus {
-    opacity: 1;
-    transform: translateY(-6px) scale(1.07) rotate(-7deg);
-    box-shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
-    background: linear-gradient(
-      120deg,
-      var(--secondary-color) 40%,
-      var(--primary-color) 100%
-    );
-  }
-  #scrollToTopBtn span.arrow-up {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 17px solid transparent;
-    border-right: 17px solid transparent;
-    border-bottom: 24px solid #fff;
-    margin-bottom: -3px;
-    animation: arrowUpAnim 2s infinite linear;
-  }
-  @keyframes arrowUpAnim {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    35% {
-      transform: translateY(-3px);
-    }
-    60% {
-      transform: translateY(2px);
-    }
-  }
-
-  /* Container fade/slide up animation */
-  .about-animate {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .about-animate-in {
-    opacity: 0;
-    transform: translateY(32px) scale(0.98);
-    animation: fadeUpStagger 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-  .about-animate-in:nth-child(1) {
-    animation-delay: 0.08s;
-  }
-  .about-animate-in:nth-child(2) {
-    animation-delay: 0.18s;
-  }
-  .about-animate-in:nth-child(3) {
-    animation-delay: 0.25s;
-  }
-  .about-animate-in:nth-child(4) {
-    animation-delay: 0.35s;
-  }
-
-  @keyframes fadeUpStagger {
-    0% {
-      opacity: 0;
-      transform: translateY(32px) scale(0.98);
-      filter: blur(2px);
-    }
-    80% {
-      filter: blur(0);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-  }
-
-  /* About cards grid */
-  .about-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 1.1rem 1.5rem;
-    width: 100%;
-    max-width: 900px;
-    margin: 2rem auto;
-    justify-content: center;
-  }
-  .about-card {
-    opacity: 0;
-    transform: translateY(38px) scale(0.95);
-    background: var(--background-white);
-    border-radius: 1.1rem;
-    box-shadow: 0 6px 36px var(--shadow-light),
-      0 1.2px 0 var(--primary-color);
-    padding: 1.12rem 1rem 1rem 1rem;
-    text-align: center;
-    min-height: 86px;
-    border: 2px solid #f2effa;
-    border-left: 4px solid var(--primary-color);
-    margin: 0 auto;
-    animation: aboutCardPopUp 0.77s cubic-bezier(0.45, 0.12, 0.35, 1.18)
-      forwards;
-  }
-  /* Stagger delay needs to be set inline in HTML for cards */
-  @keyframes aboutCardPopUp {
-    0% {
-      opacity: 0;
-      transform: translateY(38px) scale(0.95);
-      filter: blur(2.5px);
-    }
-    70% {
-      filter: blur(0);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-  }
-  .about-card-label {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: 0.1px;
-    margin-bottom: 0.25rem;
-  }
-  .about-card-value {
-    color: var(--text-dark);
-    font-size: 1.03rem;
-    font-weight: 500;
-  }
-  /* Testimonial styling */
-  .testimonial-quote {
-    max-width: 480px;
-    font-style: italic;
-    font-size: 1.01rem;
-    color: var(--text-dark);
-    text-align: center;
-    border-left: 4px solid var(--primary-color);
-    padding-left: 1rem;
-    margin: 1.5rem auto 0 auto;
-    background: #fcfbfd;
-    border-radius: 7px;
-    box-shadow: 0 4px 16px var(--shadow-light);
-    opacity: 0;
-    transform: translateY(36px) scale(0.97);
-    animation: fadeUpStagger 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.7s;
-  }
-  .testimonial-quote footer {
-    margin-top: 0.5rem;
-    font-weight: 700;
-    font-style: normal;
-    color: var(--primary-color);
-  }
-
-  /* Testimonials Section */
-  .testimonials-section {
-    max-width: 960px;
-    margin: 2.5rem auto 4rem auto;
-    padding: 0 1rem;
-  }
-  .section-title {
-    text-align: center;
-    font-size: 2.1rem;
-    color: var(--primary-color);
-    font-weight: 900;
-    margin-bottom: 2.8rem;
-    letter-spacing: 0.04em;
-  }
-  .testimonials-grid {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .testimonial-card {
-    background: var(--background-white);
-    border-radius: 1.1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    padding: 1.2rem 1rem 2rem;
-    width: 280px;
-    text-align: center;
-    cursor: default;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      box-shadow 0.25s ease;
-    outline-offset: 4px;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeSlideIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-  .testimonial-card:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  .testimonial-card:nth-child(2) {
-    animation-delay: 0.3s;
-  }
-  .testimonial-card:nth-child(3) {
-    animation-delay: 0.5s;
-  }
-  .testimonial-card:focus,
-  .testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.12);
-    outline: none;
-  }
-  .testimonial-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 1rem;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-  }
-  .testimonial-card:hover .testimonial-photo,
-  .testimonial-card:focus .testimonial-photo {
-    transform: scale(1.05);
-  }
-  .testimonial-card blockquote {
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--text-dark);
-    line-height: 1.4;
-    margin: 0 0 0.8rem;
-  }
-  .testimonial-card footer {
-    font-weight: 700;
-    font-style: normal;
-    color: var(--primary-color);
-  }
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 480px) {
-    /* Owner visuals */
-    .owner-photo {
-      width: 150px !important;
-      height: 150px !important;
-    }
-    /* Intro paragraph readability */
-    .about-animate p.text-center {
-      font-size: 1rem;
-      line-height: 1.7;
-      padding: 0 4px;
-      max-width: 92vw !important;
-    }
-    /* Card grid: full-width, spacing, padding */
-    .about-cards-grid {
-      grid-template-columns: 1fr;
-      gap: 0.9rem;
-      max-width: 100%;
-      width: 100%;
-      padding: 0 2px;
-      margin: 1.2rem auto 0.8rem;
-    }
-    .about-card {
-      width: 100%;
-      padding: 1rem 0.9rem 0.95rem;
-      border-radius: 14px;
-      border: 1px solid #eee9fb;
-      border-left: 4px solid var(--primary-color);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-      transform: translateY(24px) scale(0.98);
-      min-height: unset;
-    }
-    .about-card-label {
-      font-size: 1.02rem;
-      margin-bottom: 0.2rem;
-    }
-    .about-card-value {
-      font-size: 0.98rem;
-      line-height: 1.5;
-    }
-    /* Multi-line value spacing fix */
-    .about-card .about-card-value br {
-      display: none;
-    }
-    /* Testimonials list stack if any flex layout used elsewhere */
-    .testimonials-grid {
-      flex-direction: column;
-      max-width: 320px;
-      margin-bottom: 2rem;
-    }
-    .testimonial-card {
-      width: 100%;
-      margin-bottom: 1.2rem;
-    }
-  }
-
-  /* Responsive Navbar Styles - Added from FAQ */
-  /* Hide original nav-links on small screens */
-  @media (max-width: 480px) {
-    .navbar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: 250px;
-      background: var(--background-white);
-      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-      z-index: 10000;
-      padding-top: 4.5rem; /* To clear header */
-    }
-    .navbar.active {
-      transform: translateX(0);
-    }
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding-left: 1.5rem;
-    }
-    .nav-links li a {
-      font-size: 1.25rem;
-    }
-    /* Hide nav-links in header since the navbar slides in */
-    .navbar:not(.active) ul {
-      pointer-events: none;
-    }
-
-    /* Hamburger button */
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 30px;
-      height: 24px;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      margin-right: 1rem;
-      z-index: 11000;
-    }
-    .hamburger:focus {
-      outline: 2px solid var(--primary-color);
-      outline-offset: 2px;
-    }
-    .hamburger div {
-      width: 30px;
-      height: 3px;
-      background-color: var(--primary-color);
-      border-radius: 2px;
-      transition: all 0.3s linear;
-      position: relative;
-      transform-origin: 1px;
-    }
-
-    /* Animate hamburger to "X" when active */
-    .hamburger.active div:nth-child(1) {
-      transform: rotate(45deg);
-    }
-    .hamburger.active div:nth-child(2) {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    .hamburger.active div:nth-child(3) {
-      transform: rotate(-45deg);
-    }
-
-    /* Hide original navbar in header */
-    header .navbar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: 250px;
-      background: var(--background-white);
-      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-      z-index: 9999;
-      padding-top: 4.5rem;
-    }
-  }
-
-  /* Show hamburger only on mobile */
-  .hamburger {
-    display: none;
-  }
-
-  @media (max-width: 480px) {
-    .hamburger {
-      display: flex;
-    }
-  }
-</style>
-
-  <!-- Header -->
-  <header class="header flex-between" role="banner">
-    <a href="index.html" class="logo flex-center" aria-label="VibeEarning Home">
-      <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
-      <span class="visually-hidden">VibeEarning</span>
-    </a>
-
-  <!-- Hamburger Toggle Button for Mobile -->
-  <button
-    class="hamburger"
-    aria-label="Toggle navigation menu"
-    aria-expanded="false"
-    aria-controls="primary-navigation"
-  >
-    <div></div>
-    <div></div>
-    <div></div>
-  </button>
-
-  <nav
-    class="navbar"
-    role="navigation"
-    aria-label="Primary navigation"
-    id="primary-navigation"
-  >
-    <ul class="nav-links" role="menubar">
-      <li role="none">
-        <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
-      </li>
-      <li role="none">
-        <a
-          href="about.html"
-          role="menuitem"
-          tabindex="0"
-          aria-current="page"
-          >About</a
-        >
-      </li>
-      <li role="none">
-        <a href="faq.html" role="menuitem" tabindex="0">FAQ</a>
-      </li>
-      <li role="none">
-        <a href="legal.html" role="menuitem" tabindex="0">Compliance</a>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<!-- Main About Content -->
-<main role="main">
-  <div class="container p-6 max-w-xl about-animate">
-    <h2
-      class="about-animate-in text-center text-3xl font-bold mb-4"
-      style="color: var(--primary-color)"
-    >
-      Mr.Haresh Chavda, Development Officer With Experience Of 15+ Years
-    </h2>
-
-    <img
-      src="assets/img/hello.jpg"
-      alt="Photo of Mr. Haresh Chavda"
-      class="about-animate-in owner-photo mx-auto mb-6"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About the Owner – VibeEarning</title>
+    <meta
+      name="description"
+      content="Learn about Mr. Haresh Chavda, Development officer with 15+ years of experience."
     />
 
-    <p
-      class="about-animate-in text-center leading-relaxed mb-7"
-      style="max-width: 420px; margin-left: auto; margin-right: auto"
-    >
-      Dedicated to empowering over 2,000 families across India with trusted
-      insurance and personalized planning. With 15+ years of experience, he
-      is passionate about security, trust, and client success.
-    </p>
-
-    <!-- Animated CARD GRID -->
-    <div class="about-cards-grid">
-      <div
-        class="about-card about-card-anim"
-        style="animation-delay: 0.08s"
-      >
-        <span class="about-card-label">Years of Experience</span>
-        <span class="about-card-value">15+ Years</span>
-      </div>
-      <div
-        class="about-card about-card-anim"
-        style="animation-delay: 0.18s"
-      >
-        <span class="about-card-label">Expertise</span>
-        <span class="about-card-value"
-          >Retirement, Children's Education, Health & Term Insurance</span
-        >
-      </div>
-      <div
-        class="about-card about-card-anim"
-        style="animation-delay: 0.48s"
-      >
-        <span class="about-card-label">Clients Secured</span>
-        <span class="about-card-value">20,000+</span>
-      </div>
-      <div
-        class="about-card about-card-anim"
-        style="animation-delay: 0.58s"
-      >
-        <span class="about-card-label">Languages</span>
-        <span class="about-card-value">Hindi, English, Gujarati</span>
-      </div>
-    </div>
-
-    <!-- Testimonials Section -->
     <style>
-      /* --- Testimonials Slider Styles --- */
-      .testimonials-section {
-        margin: 3.5rem auto 1.8rem auto;
-        max-width: 900px;
-        text-align: center;
+      /* CSS Variables for easy theming (optional if you want to keep) */
+      :root {
+        --primary-color: #8a2be2;
+        --primary-hover: #6a1bc4;
+        --secondary-color: #ff9800;
+        --background-light: #f5f7fa;
+        --background-white: #fff;
+        --text-dark: #333;
+        --text-muted: #666;
+        --shadow-light: rgba(0, 0, 0, 0.05);
+        --shadow-strong: rgba(0, 0, 0, 0.2);
+        --transition-speed: 0.35s;
+        --border-radius: 25px;
+        --max-width: 1200px;
+        --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --ease-curve: cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .section-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--primary-color, #8a2be2);
-        margin-bottom: 2.3rem;
-        letter-spacing: 0.01em;
-      }
-      .testimonials-slider-wrapper {
-        position: relative;
-        max-width: 700px;
-        margin: 0 auto 2rem auto;
-        overflow: hidden;
-      }
-      .testimonials-slider {
-        display: flex;
-        transition: transform 0.45s cubic-bezier(0.7, 0.14, 0.31, 1);
-        will-change: transform;
-      }
-      .testimonial-card {
-        min-width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        background: #fff;
-        border-radius: 1.2rem;
-        box-shadow: 0 8px 32px rgba(138, 43, 226, 0.07);
-        padding: 2.3rem 1.3rem 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        opacity: 1;
-      }
-      .testimonial-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 1.1rem;
-        border: 2.5px solid var(--primary-color, #8a2be2);
-      }
-      .testimonial-card blockquote {
+
+      /* Reset and base */
+      *,
+      *::before,
+      *::after {
         margin: 0;
-        font-style: italic;
-        color: #444;
+        padding: 0;
+        box-sizing: border-box;
       }
-      .testimonial-card footer {
-        margin-top: 0.8em;
-        color: var(--primary-color, #8a2be2);
-        font-weight: 700;
-        font-size: 1rem;
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
       }
-      .testimonial-nav {
-        background: rgba(138, 43, 226, 0.09);
-        border: none;
-        border-radius: 55%;
-        color: var(--primary-color, #8a2be2);
-        font-size: 2.3rem;
-        width: 46px;
-        height: 46px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: background 0.2s, color 0.2s;
-        cursor: pointer;
-        z-index: 4;
-        box-shadow: 0 4px 20px rgba(138, 43, 226, 0.09);
-        outline: none;
+      body {
+        font-family: var(--font-family-base);
+        line-height: 1.6;
+        background-color: var(--background-light);
+        color: var(--text-dark);
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition: background-color var(--transition-speed) var(--ease-curve);
       }
-      .testimonial-nav.prev {
-        left: -18px;
-      }
-      .testimonial-nav.next {
-        right: -18px;
-      }
-      .testimonial-nav:hover,
-      .testimonial-nav:focus {
-        background: linear-gradient(135deg, #8a2be2 70%, #ff9800 100%);
-        color: #fff;
-      }
-      @media (max-width: 700px) {
-        .testimonials-slider-wrapper {
-          max-width: 98vw;
-        }
-        .testimonial-card,
-        .testimonials-slider {
-          min-width: 100%;
-          max-width: 100%;
-        }
-        .testimonial-nav.prev {
-          left: 0;
-        }
-        .testimonial-nav.next {
-          right: 0;
-        }
-      }
-      .testimonial-quote {
-        margin: 3rem auto 0;
-        max-width: 650px;
-        font-size: 1.15rem;
-        display: flex;
-        align-items: center;
-        gap: 1.4rem;
-        opacity: 0;
-        animation: fadeInTestimonialQuote 1.2s 0.7s forwards;
-      }
-      .testimonial-quote-photo {
-        width: 100px;
-        height: 100px;
-        border-radius: 90%;
-        object-fit: cover;
-        border: 2.5px solid var(--primary-color, #8a2be2);
-      }
-      @keyframes fadeInTestimonialQuote {
-        0% {
-          opacity: 0;
-          transform: translateY(32px);
-        }
-        100% {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      .mt-8 {
-        margin-top: 2rem;
+
+      /* Layout helpers */
+      .container {
+        width: 90%;
+        max-width: var(--max-width);
+        margin: 0 auto;
       }
       .text-center {
         text-align: center;
       }
-      .text-sm {
-        font-size: 1.03rem;
+      .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      .italic {
-        font-style: italic;
+      .flex-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .text-gray-600 {
-        color: #5b5a70;
+      .visually-hidden {
+        position: absolute !important;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0 !important;
+        border: 0 !important;
+        height: 1px !important;
+        width: 1px !important;
+        overflow: hidden;
+      }
+
+      /* Header & Nav */
+      .header {
+        background-color: var(--background-white);
+        padding: 1rem 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+      }
+      .logo img {
+        height: 75px;
+        margin-right: 15px;
+        transition: transform 0.3s var(--ease-curve);
+      }
+      .logo img:hover,
+      .logo img:focus {
+        transform: scale(1.1);
+      }
+      .navbar {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 1.25rem;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #444;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: color var(--transition-speed) var(--ease-curve);
+        position: relative;
+        padding: 0.25rem 0.5rem;
+      }
+      .nav-links a::after {
+        content: "";
+        display: block;
+        width: 0%;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      .nav-links a:hover,
+      .nav-links a:focus {
+        color: var(--primary-color);
+      }
+      .nav-links a:hover::after,
+      .nav-links a:focus::after {
+        width: 100%;
+      }
+
+      /* Owner photo styling - larger and interactive */
+      .owner-photo {
+        width: 90px !important;
+        height: 90px !important;
+        max-width: 90vw;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        transition: transform 0.4s ease, filter 0.3s;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .owner-photo:hover,
+      .owner-photo:focus {
+        transform: scale(1.05);
+        filter: saturate(1.1);
+        outline: none;
+      }
+
+      /* Scroll to Top Button: style and animation */
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 36px;
+        right: 36px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 65%,
+          var(--secondary-color) 100%
+        );
+        color: white;
+        padding: 0.9rem 1.3rem;
+        border-radius: 55px;
+        font-size: 2rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(138, 43, 226, 0.2);
+        opacity: 0.85;
+        z-index: 9999;
+        outline: none;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+        display: none;
+      }
+      #scrollToTopBtn:hover,
+      #scrollToTopBtn:focus {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.07) rotate(-7deg);
+        box-shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
+        background: linear-gradient(
+          120deg,
+          var(--secondary-color) 40%,
+          var(--primary-color) 100%
+        );
+      }
+      #scrollToTopBtn span.arrow-up {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 24px solid #fff;
+        margin-bottom: -3px;
+        animation: arrowUpAnim 2s infinite linear;
+      }
+      @keyframes arrowUpAnim {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        35% {
+          transform: translateY(-3px);
+        }
+        60% {
+          transform: translateY(2px);
+        }
+      }
+
+      /* Container fade/slide up animation */
+      .about-animate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .about-animate-in {
         opacity: 0;
-        animation: fadeInTestimonialQuote 1.3s 0.82s forwards;
+        transform: translateY(32px) scale(0.98);
+        animation: fadeUpStagger 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .about-animate-in:nth-child(1) {
+        animation-delay: 0.08s;
+      }
+      .about-animate-in:nth-child(2) {
+        animation-delay: 0.18s;
+      }
+      .about-animate-in:nth-child(3) {
+        animation-delay: 0.25s;
+      }
+      .about-animate-in:nth-child(4) {
+        animation-delay: 0.35s;
       }
 
-      /* Mobile-only fine tuning for slider buttons tap targets */
-      @media (max-width: 480px) {
-        .testimonials-slider-wrapper {
-          padding: 0 6px;
+      @keyframes fadeUpStagger {
+        0% {
+          opacity: 0;
+          transform: translateY(32px) scale(0.98);
+          filter: blur(2px);
         }
-        .testimonial-nav {
-          width: 40px;
-          height: 40px;
-          font-size: 2rem;
+        80% {
+          filter: blur(0);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      /* About cards grid */
+      .about-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 1.1rem 1.5rem;
+        width: 100%;
+        max-width: 900px;
+        margin: 2rem auto;
+        justify-content: center;
+      }
+      .about-card {
+        opacity: 0;
+        transform: translateY(38px) scale(0.95);
+        background: var(--background-white);
+        border-radius: 1.1rem;
+        box-shadow: 0 6px 36px var(--shadow-light),
+          0 1.2px 0 var(--primary-color);
+        padding: 1.12rem 1rem 1rem 1rem;
+        text-align: center;
+        min-height: 86px;
+        border: 2px solid #f2effa;
+        border-left: 4px solid var(--primary-color);
+        margin: 0 auto;
+        animation: aboutCardPopUp 0.77s cubic-bezier(0.45, 0.12, 0.35, 1.18)
+          forwards;
+      }
+      /* Stagger delay needs to be set inline in HTML for cards */
+      @keyframes aboutCardPopUp {
+        0% {
+          opacity: 0;
+          transform: translateY(38px) scale(0.95);
+          filter: blur(2.5px);
+        }
+        70% {
+          filter: blur(0);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+      .about-card-label {
+        display: block;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        letter-spacing: 0.1px;
+        margin-bottom: 0.25rem;
+      }
+      .about-card-value {
+        color: var(--text-dark);
+        font-size: 1.03rem;
+        font-weight: 500;
+      }
+      /* Testimonial styling */
+      .testimonial-quote {
+        max-width: 480px;
+        font-style: italic;
+        font-size: 1.01rem;
+        color: var(--text-dark);
+        text-align: center;
+        border-left: 4px solid var(--primary-color);
+        padding-left: 1rem;
+        margin: 1.5rem auto 0 auto;
+        background: #fcfbfd;
+        border-radius: 7px;
+        box-shadow: 0 4px 16px var(--shadow-light);
+        opacity: 0;
+        transform: translateY(36px) scale(0.97);
+        animation: fadeUpStagger 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.7s;
+      }
+      .testimonial-quote footer {
+        margin-top: 0.5rem;
+        font-weight: 700;
+        font-style: normal;
+        color: var(--primary-color);
+      }
+
+      /* Testimonials Section */
+      .testimonials-section {
+        max-width: 960px;
+        margin: 2.5rem auto 4rem auto;
+        padding: 0 1rem;
+      }
+      .section-title {
+        text-align: center;
+        font-size: 2.1rem;
+        color: var(--primary-color);
+        font-weight: 900;
+        margin-bottom: 2.8rem;
+        letter-spacing: 0.04em;
+      }
+      .testimonials-grid {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .testimonial-card {
+        background: var(--background-white);
+        border-radius: 1.1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        padding: 1.2rem 1rem 2rem;
+        width: 280px;
+        text-align: center;
+        cursor: default;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.25s ease;
+        outline-offset: 4px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeSlideIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .testimonial-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .testimonial-card:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .testimonial-card:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+      .testimonial-card:focus,
+      .testimonial-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.12);
+        outline: none;
+      }
+      .testimonial-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+      }
+      .testimonial-card:hover .testimonial-photo,
+      .testimonial-card:focus .testimonial-photo {
+        transform: scale(1.05);
+      }
+      .testimonial-card blockquote {
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--text-dark);
+        line-height: 1.4;
+        margin: 0 0 0.8rem;
+      }
+      .testimonial-card footer {
+        font-weight: 700;
+        font-style: normal;
+        color: var(--primary-color);
+      }
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 480px) {
+        /* Owner visuals */
+        .owner-photo {
+          width: 150px !important;
+          height: 150px !important;
+        }
+        /* Intro paragraph readability */
+        .about-animate p.text-center {
+          font-size: 1rem;
+          line-height: 1.7;
+          padding: 0 4px;
+          max-width: 92vw !important;
+        }
+        /* Card grid: full-width, spacing, padding */
+        .about-cards-grid {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+          max-width: 100%;
+          width: 100%;
+          padding: 0 2px;
+          margin: 1.2rem auto 0.8rem;
+        }
+        .about-card {
+          width: 100%;
+          padding: 1rem 0.9rem 0.95rem;
+          border-radius: 14px;
+          border: 1px solid #eee9fb;
+          border-left: 4px solid var(--primary-color);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+          transform: translateY(24px) scale(0.98);
+          min-height: unset;
+        }
+        .about-card-label {
+          font-size: 1.02rem;
+          margin-bottom: 0.2rem;
+        }
+        .about-card-value {
+          font-size: 0.98rem;
+          line-height: 1.5;
+        }
+        /* Multi-line value spacing fix */
+        .about-card .about-card-value br {
+          display: none;
+        }
+        /* Testimonials list stack if any flex layout used elsewhere */
+        .testimonials-grid {
+          flex-direction: column;
+          max-width: 320px;
+          margin-bottom: 2rem;
+        }
+        .testimonial-card {
+          width: 100%;
+          margin-bottom: 1.2rem;
+        }
+
+        /* Hamburger fixes to show */
+        .hamburger {
+          display: flex !important;
+          z-index: 11001 !important;
+          position: relative;
+        }
+      }
+
+      /* Responsive Navbar Styles - Added from FAQ */
+      /* Hide original nav-links on small screens */
+      @media (max-width: 480px) {
+        .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 10000;
+          padding-top: 4.5rem; /* To clear header */
+        }
+        .navbar.active {
+          transform: translateX(0);
+        }
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          padding-left: 1.5rem;
+        }
+        .nav-links li a {
+          font-size: 1.25rem;
+        }
+        /* Hide nav-links in header since the navbar slides in */
+        .navbar:not(.active) ul {
+          pointer-events: none;
+        }
+
+        /* Hamburger button */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 30px;
+          height: 24px;
+          cursor: pointer;
+          background: transparent;
+          border: none;
+          margin-right: 1rem;
+          z-index: 11000;
+          position: relative;
+        }
+        .hamburger:focus {
+          outline: 2px solid var(--primary-color);
+          outline-offset: 2px;
+        }
+        .hamburger div {
+          width: 30px;
+          height: 3px;
+          background-color: var(--primary-color);
+          border-radius: 2px;
+          transition: all 0.3s linear;
+          position: relative;
+          transform-origin: 1px;
+        }
+
+        /* Animate hamburger to "X" when active */
+        .hamburger.active div:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        .hamburger.active div:nth-child(2) {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        .hamburger.active div:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        /* Hide original navbar in header */
+        header .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 9999;
+          padding-top: 4.5rem;
+        }
+      }
+
+      /* Show hamburger only on mobile */
+      .hamburger {
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .hamburger {
+          display: flex !important;
+          position: relative;
+          z-index: 11001;
         }
       }
     </style>
+  </head>
+  <body>
+    <!-- Header and Navigation -->
+    <header class="header flex-between" role="banner">
+      <a
+        href="index.html"
+        class="logo flex-center"
+        aria-label="VibeEarning Home"
+      >
+        <img src="assets/img/logo.png" alt="VibeEarning Logo" height="50" />
+        <span class="visually-hidden">VibeEarning</span>
+      </a>
 
-    <section
-      class="testimonials-section"
-      aria-labelledby="testimonials-title"
-    >
-      <h2 id="testimonials-title" class="section-title">
-        What Our Top Agents Say
-      </h2>
-      <div class="testimonials-slider-wrapper">
-        <button
-          class="testimonial-nav prev"
-          aria-label="Previous testimonial"
+      <!-- Hamburger Toggle Button for Mobile -->
+      <button
+        class="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        type="button"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+
+      <nav
+        class="navbar"
+        role="navigation"
+        aria-label="Primary navigation"
+        id="primary-navigation"
+      >
+        <ul class="nav-links" role="menubar">
+          <li role="none">
+            <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
+          </li>
+          <li role="none">
+            <a
+              href="about.html"
+              role="menuitem"
+              tabindex="0"
+              aria-current="page"
+              >About</a
+            >
+          </li>
+          <li role="none">
+            <a href="faq.html" role="menuitem" tabindex="0">FAQ</a>
+          </li>
+          <li role="none">
+            <a href="legal.html" role="menuitem" tabindex="0">Compliance</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main About Content -->
+    <main role="main">
+      <div class="container p-6 max-w-xl about-animate">
+        <h2
+          class="about-animate-in text-center text-3xl font-bold mb-4"
+          style="color: var(--primary-color)"
         >
-          &#8249;
-        </button>
-        <div class="testimonials-slider" tabindex="0">
-          <!-- Card 1 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent6.png"
-              alt="Photo of Agent Sajitsinh Parmar"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "Joining LIC agency transformed my career. The training and
-                support from VibeEarning made everything seamless."
-              </p>
-              <footer>-Sajitsinh Parmar, 14 years</footer>
-            </blockquote>
-          </article>
+          Mr.Haresh Chavda, Senior LIC Advisor
+        </h2>
 
-          <!-- Card 2 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent7.jpg"
-              alt="Photo of Agent Miteshbhai Chamar"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "It's more than a job—it's a family. The growth and
-                recognition I get here is amazing."
-              </p>
-                <footer>- Nikeshbhai Chamar, 13 years</footer>
-            </blockquote>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/vraj.png"
-              alt="Photo of Agent Vraj Patel"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "VibeEarning's mentorship and the sense of community helped
-                me grow rapidly as an LIC agent."
-              </p>
-              <footer>- Vraj Patel, 12 years</footer>
-            </blockquote>
-          </article>
-
-          <!-- Card 4 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent2.png"
-              alt="Photo of Agent Jivanbhai Bharwad"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "The flexible hours allow me to balance family and work. The
-                income is rewarding, and the clients are very appreciative."
-              </p>
-              <footer>- Jivanbhai Bharwad, 11 years</footer>
-            </blockquote>
-          </article>
-
-          <!-- Card 5 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent4.png"
-              alt="Photo of Agent VikramSinh Rathod"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "Never thought a second career could be this rewarding. I
-                gained financial freedom and new friends."
-              </p>
-              <footer>-VikramSinh Rathod, 10 years</footer>
-            </blockquote>
-          </article>
-
-          <!-- Card 6 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent1.png"
-              alt="Photo of Agent Snehal Prajapati"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "The IRDAI exam guidance and onboarding help were critical
-                for my success. Highly recommended!"
-              </p>
-              <footer>-Snehal Prajapati, 5 years</footer>
-            </blockquote>
-          </article>
-          <!-- Card 7 -->
-          <article class="testimonial-card" tabindex="0">
-            <img
-              src="assets/img/agent5.png"
-              alt="Photo of Agent Bharatbhai Barot"
-              class="testimonial-photo"
-            />
-            <blockquote>
-              <p>
-                "The continual support makes VibeEarning stand out. It's a
-                team with values, not just business."
-              </p>
-              <footer>-Bharatbhai Barot, 5 years</footer>
-            </blockquote>
-          </article>
-        </div>
-        <button class="testimonial-nav next" aria-label="Next testimonial">
-          &#8250;
-        </button>
-      </div>
-
-      <!-- Photo blockquote as requested -->
-      <blockquote
-        class="about-animate-in testimonial-quote"
-        style="animation-delay: 0.7s"
-      >
         <img
-          src="assets/img/vaishaliben.jpg"
-          alt="Photo of Mr. Vaishaliben Patel"
-          class="testimonial-quote-photo"
+          src="assets/img/hello.jpg"
+          alt="Photo of Mr. Haresh Chavda"
+          class="about-animate-in owner-photo mx-auto mb-6"
         />
-        <div>
-          <p>
-            "Mr.Chavda provided the best guidance and care for our family's
-            insurance needs. A trusted advisor who truly understands his
-            clients."
-          </p>
-          <footer>— Mrs. Vaishaliben Patel</footer>
+
+        <p
+          class="about-animate-in text-center leading-relaxed mb-7"
+          style="max-width: 420px; margin-left: auto; margin-right: auto"
+        >
+          Dedicated to empowering over 2,000 families across India with trusted
+          insurance and personalized planning. With 15+ years of experience, he
+          is passionate about security, trust, and client success.
+        </p>
+
+        <!-- Animated CARD GRID -->
+        <div class="about-cards-grid">
+          <div
+            class="about-card about-card-anim"
+            style="animation-delay: 0.08s"
+          >
+            <span class="about-card-label">Years of Experience</span>
+            <span class="about-card-value">15+ Years</span>
+          </div>
+          <div
+            class="about-card about-card-anim"
+            style="animation-delay: 0.18s"
+          >
+            <span class="about-card-label">Expertise</span>
+            <span class="about-card-value"
+              >Retirement, Children's Education, Health & Term Insurance</span
+            >
+          </div>
+          <div
+            class="about-card about-card-anim"
+            style="animation-delay: 0.48s"
+          >
+            <span class="about-card-label">Clients Secured</span>
+            <span class="about-card-value">20,000+</span>
+          </div>
+          <div
+            class="about-card about-card-anim"
+            style="animation-delay: 0.58s"
+          >
+            <span class="about-card-label">Languages</span>
+            <span class="about-card-value">Hindi, English, Gujarati</span>
+          </div>
         </div>
-      </blockquote>
-      <p
-        class="about-animate-in mt-8 text-center text-sm italic text-gray-600"
-        style="animation-delay: 0.82s"
-      >
-        Committed to education, free seminars, and community service to
-        promote financial literacy for all.
+
+        <!-- Testimonials Section -->
+        <style>
+          /* --- Testimonials Slider Styles --- */
+          .testimonials-section {
+            margin: 3.5rem auto 1.8rem auto;
+            max-width: 900px;
+            text-align: center;
+          }
+          .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color, #8a2be2);
+            margin-bottom: 2.3rem;
+            letter-spacing: 0.01em;
+          }
+          .testimonials-slider-wrapper {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            overflow: hidden;
+          }
+          .testimonials-slider {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.7, 0.14, 0.31, 1);
+            will-change: transform;
+          }
+          .testimonial-card {
+            min-width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.07);
+            padding: 2.3rem 1.3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 1;
+          }
+          .testimonial-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.1rem;
+            border: 2.5px solid var(--primary-color, #8a2be2);
+          }
+          .testimonial-card blockquote {
+            margin: 0;
+            font-style: italic;
+            color: #444;
+          }
+          .testimonial-card footer {
+            margin-top: 0.8em;
+            color: var(--primary-color, #8a2be2);
+            font-weight: 700;
+            font-size: 1rem;
+          }
+          .testimonial-nav {
+            background: rgba(138, 43, 226, 0.09);
+            border: none;
+            border-radius: 55%;
+            color: var(--primary-color, #8a2be2);
+            font-size: 2.3rem;
+            width: 46px;
+            height: 46px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+            z-index: 4;
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.09);
+            outline: none;
+          }
+          .testimonial-nav.prev {
+            left: -18px;
+          }
+          .testimonial-nav.next {
+            right: -18px;
+          }
+          .testimonial-nav:hover,
+          .testimonial-nav:focus {
+            background: linear-gradient(135deg, #8a2be2 70%, #ff9800 100%);
+            color: #fff;
+          }
+          @media (max-width: 700px) {
+            .testimonials-slider-wrapper {
+              max-width: 98vw;
+            }
+            .testimonial-card,
+            .testimonials-slider {
+              min-width: 100%;
+              max-width: 100%;
+            }
+            .testimonial-nav.prev {
+              left: 0;
+            }
+            .testimonial-nav.next {
+              right: 0;
+            }
+          }
+          .testimonial-quote {
+            margin: 3rem auto 0;
+            max-width: 650px;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            opacity: 0;
+            animation: fadeInTestimonialQuote 1.2s 0.7s forwards;
+          }
+          .testimonial-quote-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 90%;
+            object-fit: cover;
+            border: 2.5px solid var(--primary-color, #8a2be2);
+          }
+          @keyframes fadeInTestimonialQuote {
+            0% {
+              opacity: 0;
+              transform: translateY(32px);
+            }
+            100% {
+              opacity: 1;
+              transform: none;
+            }
+          }
+          .mt-8 {
+            margin-top: 2rem;
+          }
+          .text-center {
+            text-align: center;
+          }
+          .text-sm {
+            font-size: 1.03rem;
+          }
+          .italic {
+            font-style: italic;
+          }
+          .text-gray-600 {
+            color: #5b5a70;
+          }
+          .about-animate-in {
+            opacity: 0;
+            animation: fadeInTestimonialQuote 1.3s 0.82s forwards;
+          }
+
+          /* Mobile-only fine tuning for slider buttons tap targets */
+          @media (max-width: 480px) {
+            .testimonials-slider-wrapper {
+              padding: 0 6px;
+            }
+            .testimonial-nav {
+              width: 40px;
+              height: 40px;
+              font-size: 2rem;
+            }
+          }
+        </style>
+
+        <section
+          class="testimonials-section"
+          aria-labelledby="testimonials-title"
+        >
+          <h2 id="testimonials-title" class="section-title">
+            What Our Top Agents Say
+          </h2>
+          <div class="testimonials-slider-wrapper">
+            <button
+              class="testimonial-nav prev"
+              aria-label="Previous testimonial"
+            >
+              &#8249;
+            </button>
+            <div class="testimonials-slider" tabindex="0">
+              <!-- Card 1 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent6.png"
+                  alt="Photo of Agent Sajitsinh Parmar"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "Joining LIC agency transformed my career. The training and
+                    support from VibeEarning made everything seamless."
+                  </p>
+                  <footer>-Sajitsinh Parmar, 14 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent7.jpg"
+                  alt="Photo of Agent Miteshbhai Chamar"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "It's more than a job—it's a family. The growth and
+                    recognition I get here is amazing."
+                  </p>
+                  <footer>- Nikeshbhai Chamar, 13 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/vraj.png"
+                  alt="Photo of Agent Vraj Patel"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "VibeEarning's mentorship and the sense of community helped
+                    me grow rapidly as an LIC agent."
+                  </p>
+                  <footer>- Vraj Patel, 12 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent2.png"
+                  alt="Photo of Agent Jivanbhai Bharwad"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The flexible hours allow me to balance family and work. The
+                    income is rewarding, and the clients are very appreciative."
+                  </p>
+                  <footer>- Jivanbhai Bharwad, 11 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 5 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent4.png"
+                  alt="Photo of Agent VikramSinh Rathod"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "Never thought a second career could be this rewarding. I
+                    gained financial freedom and new friends."
+                  </p>
+                  <footer>-VikramSinh Rathod, 10 years</footer>
+                </blockquote>
+              </article>
+
+              <!-- Card 6 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent1.png"
+                  alt="Photo of Agent Snehal Prajapati"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The IRDAI exam guidance and onboarding help were critical
+                    for my success. Highly recommended!"
+                  </p>
+                  <footer>-Snehal Prajapati, 5 years</footer>
+                </blockquote>
+              </article>
+              <!-- Card 7 -->
+              <article class="testimonial-card" tabindex="0">
+                <img
+                  src="assets/img/agent5.png"
+                  alt="Photo of Agent Bharatbhai Barot"
+                  class="testimonial-photo"
+                />
+                <blockquote>
+                  <p>
+                    "The continual support makes VibeEarning stand out. It's a
+                    team with values, not just business."
+                  </p>
+                  <footer>-Bharatbhai Barot, 5 years</footer>
+                </blockquote>
+              </article>
+            </div>
+            <button class="testimonial-nav next" aria-label="Next testimonial">
+              &#8250;
+            </button>
+          </div>
+
+          <!-- Photo blockquote as requested -->
+          <blockquote
+            class="about-animate-in testimonial-quote"
+            style="animation-delay: 0.7s"
+          >
+            <img
+              src="assets/img/vaishaliben.jpg"
+              alt="Photo of Mr. Vaishaliben Patel"
+              class="testimonial-quote-photo"
+            />
+            <div>
+              <p>
+                "Mr.Chavda provided the best guidance and care for our family's
+                insurance needs. A trusted advisor who truly understands his
+                clients."
+              </p>
+              <footer>— Mrs. Vaishaliben Patel</footer>
+            </div>
+          </blockquote>
+          <p
+            class="about-animate-in mt-8 text-center text-sm italic text-gray-600"
+            style="animation-delay: 0.82s"
+          >
+            Committed to education, free seminars, and community service to
+            promote financial literacy for all.
+          </p>
+        </section>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const slider = document.querySelector(".testimonials-slider");
+            const cards = document.querySelectorAll(".testimonial-card");
+            const prevBtn = document.querySelector(".testimonial-nav.prev");
+            const nextBtn = document.querySelector(".testimonial-nav.next");
+            let currentIndex = 0;
+            const total = cards.length;
+
+            function updateSlider() {
+              slider.style.transform =
+                "translateX(" + -currentIndex * 100 + "%)";
+            }
+
+            prevBtn.addEventListener("click", function () {
+              currentIndex = currentIndex === 0 ? total - 1 : currentIndex - 1;
+              updateSlider();
+            });
+
+            nextBtn.addEventListener("click", function () {
+              currentIndex = currentIndex === total - 1 ? 0 : currentIndex + 1;
+              updateSlider();
+            });
+
+            // Touch swipe for mobile (fixed touches reference)
+            let startX = 0,
+              isDragging = false;
+            slider.addEventListener("touchstart", (e) => {
+              startX = e.touches[0].clientX;
+              isDragging = true;
+            });
+            slider.addEventListener("touchend", () => {
+              isDragging = false;
+            });
+            slider.addEventListener("touchmove", function (e) {
+              if (!isDragging) return;
+              const currentX = e.touches[0].clientX;
+              const diff = currentX - startX;
+              if (Math.abs(diff) > 60) {
+                if (diff > 0) prevBtn.click();
+                else nextBtn.click();
+                isDragging = false;
+              }
+            });
+
+            // Keyboard navigation
+            slider.parentNode.addEventListener("keydown", function (e) {
+              if (e.key === "ArrowRight" || e.key === "d") nextBtn.click();
+              if (e.key === "ArrowLeft" || e.key === "a") prevBtn.click();
+            });
+
+            updateSlider();
+          });
+        </script>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
+      <p>
+        &copy; 2025 VibeEarning. This is an educational site focused on LIC
+        agency recruitment and is not an official LIC property.
       </p>
-    </section>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
+      <span class="arrow-up"></span>
+    </button>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const slider = document.querySelector(".testimonials-slider");
-        const cards = document.querySelectorAll(".testimonial-card");
-        const prevBtn = document.querySelector(".testimonial-nav.prev");
-        const nextBtn = document.querySelector(".testimonial-nav.next");
-        let currentIndex = 0;
-        const total = cards.length;
-
-        function updateSlider() {
-          slider.style.transform =
-            "translateX(" + -currentIndex * 100 + "%)";
+      const scrollBtn = document.getElementById("scrollToTopBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+          scrollBtn.style.display = "block";
+        } else {
+          scrollBtn.style.display = "none";
         }
+      });
 
-        prevBtn.addEventListener("click", function () {
-          currentIndex = currentIndex === 0 ? total - 1 : currentIndex - 1;
-          updateSlider();
-        });
+      scrollBtn.addEventListener("click", () => {
+        scrollBtn.animate(
+          [
+            { transform: "rotate(0deg) scale(1)" },
+            { transform: "rotate(360deg) scale(1.25)" },
+            { transform: "rotate(390deg) scale(0.96)" },
+            { transform: "rotate(360deg) scale(1)" },
+          ],
+          { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
 
-        nextBtn.addEventListener("click", function () {
-          currentIndex = currentIndex === total - 1 ? 0 : currentIndex + 1;
-          updateSlider();
-        });
+      // Accessibility: Show focus outline only on keyboard navigation
+      function handleFirstTab(e) {
+        if (e.key === "Tab") {
+          document.body.classList.add("user-is-tabbing");
+          window.removeEventListener("keydown", handleFirstTab);
+        }
+      }
+      window.addEventListener("keydown", handleFirstTab);
+    </script>
 
-        // Touch swipe for mobile (fixed touches reference)
-        let startX = 0,
-          isDragging = false;
-        slider.addEventListener("touchstart", (e) => {
-          startX = e.touches.clientX;
-          isDragging = true;
-        });
-        slider.addEventListener("touchend", () => {
-          isDragging = false;
-        });
-        slider.addEventListener("touchmove", function (e) {
-          if (!isDragging) return;
-          const currentX = e.touches.clientX;
-          const diff = currentX - startX;
-          if (Math.abs(diff) > 60) {
-            if (diff > 0) prevBtn.click();
-            else nextBtn.click();
-            isDragging = false;
-          }
-        });
+    <script>
+      // Waits two minutes, then sends a "real visitor" ping to backend
+      setTimeout(function () {
+        fetch("real_visit.php", { method: "POST" }).catch(() => {});
+      }, 2 * 60 * 1000);
 
-        // Keyboard navigation
-        slider.parentNode.addEventListener("keydown", function (e) {
-          if (e.key === "ArrowRight" || e.key === "d") nextBtn.click();
-          if (e.key === "ArrowLeft" || e.key === "a") prevBtn.click();
-        });
+      // Loads and displays "real visitor" count
+      function updateRealVisitorStat() {
+        fetch("real_visit.php")
+          .then((resp) => resp.text())
+          .then((count) => {
+            const statEl = document.querySelector(".stat-number");
+            if (statEl) statEl.textContent = count;
+          })
+          .catch(() => {});
+      }
+      // Call it right away and every 40s to keep stat fresh
+      updateRealVisitorStat();
+      setInterval(updateRealVisitorStat, 40000);
+    </script>
 
-        updateSlider();
+    <!-- Hamburger menu toggle script from FAQ.html -->
+    <script>
+      // Responsive navigation hamburger toggle
+      const hamburger = document.querySelector(".hamburger");
+      const navbar = document.querySelector(".navbar");
+
+      hamburger.addEventListener("click", () => {
+        const expanded =
+          hamburger.getAttribute("aria-expanded") === "true" || false;
+        hamburger.setAttribute("aria-expanded", !expanded);
+        hamburger.classList.toggle("active");
+        navbar.classList.toggle("active");
       });
     </script>
-  </div>
-</main>
-
-<!-- Footer -->
-<footer class="footer text-center p-6 bg-gray-100 mt-24" role="contentinfo">
-  <p>
-    &copy; 2025 VibeEarning. This is an educational site focused on LIC
-    agency recruitment and is not an official LIC property.
-  </p>
-</footer>
-
-<!-- Scroll to Top Button -->
-<button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
-  <span class="arrow-up"></span>
-</button>
-
-<script>
-  const scrollBtn = document.getElementById("scrollToTopBtn");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = "block";
-    } else {
-      scrollBtn.style.display = "none";
-    }
-  });
-
-  scrollBtn.addEventListener("click", () => {
-    scrollBtn.animate(
-      [
-        { transform: "rotate(0deg) scale(1)" },
-        { transform: "rotate(360deg) scale(1.25)" },
-        { transform: "rotate(390deg) scale(0.96)" },
-        { transform: "rotate(360deg) scale(1)" },
-      ],
-      { duration: 600, easing: "cubic-bezier(0.51,1.02,0,1.08)" }
-    );
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Accessibility: Show focus outline only on keyboard navigation
-  function handleFirstTab(e) {
-    if (e.key === "Tab") {
-      document.body.classList.add("user-is-tabbing");
-      window.removeEventListener("keydown", handleFirstTab);
-    }
-  }
-  window.addEventListener("keydown", handleFirstTab);
-</script>
-
-<script>
-  // Waits two minutes, then sends a "real visitor" ping to backend
-  setTimeout(function () {
-    fetch("real_visit.php", { method: "POST" }).catch(() => {});
-  }, 2 * 60 * 1000);
-
-  // Loads and displays "real visitor" count
-  function updateRealVisitorStat() {
-    fetch("real_visit.php")
-      .then((resp) => resp.text())
-      .then((count) => {
-        const statEl = document.querySelector(".stat-number");
-        if (statEl) statEl.textContent = count;
-      })
-      .catch(() => {});
-  }
-  // Call it right away and every 40s to keep stat fresh
-  updateRealVisitorStat();
-  setInterval(updateRealVisitorStat, 40000);
-</script>
-
-<!-- Hamburger menu toggle script from FAQ.html -->
-<script>
-  // Responsive navigation hamburger toggle
-  const hamburger = document.querySelector(".hamburger");
-  const navbar = document.querySelector(".navbar");
-
-  hamburger.addEventListener("click", () => {
-    const expanded =
-      hamburger.getAttribute("aria-expanded") === "true" || false;
-    hamburger.setAttribute("aria-expanded", !expanded);
-    hamburger.classList.toggle("active");
-    navbar.classList.toggle("active");
-  });
-</script>
+  </body>
+</html>
