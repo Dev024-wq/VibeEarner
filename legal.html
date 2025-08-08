@@ -185,8 +185,6 @@
         }
       }
 
-      /* Responsive Styles and Hamburger Menu */
-
       /* Variables fallback */
       :root {
         --primary-color: #8a2be2; /* Fallback purple */
@@ -197,99 +195,103 @@
         --text-muted: #666;
       }
 
-      /* Hide default nav on mobile */
+      /* Responsive Navbar Styles - EXACTLY from faq.html */
+
+      /* Hide original nav-links on small screens */
       @media (max-width: 480px) {
         .navbar {
           position: fixed;
           top: 0;
-          left: -250px;
-          width: 250px;
+          right: 0;
           height: 100vh;
+          width: 250px;
           background: var(--background-white);
-          box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 10000;
+          padding-top: 4.5rem; /* To clear header */
+        }
+        .navbar.active {
+          transform: translateX(0);
+        }
+        .nav-links {
           display: flex;
           flex-direction: column;
-          padding: 4rem 1rem 1rem;
-          transition: left 0.35s ease;
-          z-index: 10000;
-        }
-
-        .navbar.open {
-          left: 0;
-        }
-
-        .nav-links {
-          flex-direction: column;
-          gap: 1.2rem;
+          gap: 1.5rem;
+          padding-left: 1.5rem;
         }
         .nav-links li a {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: var(--text-dark);
+          font-size: 1.25rem;
+        }
+        /* Hide nav-links in header since the navbar slides in */
+        .navbar:not(.active) ul {
+          pointer-events: none;
         }
 
-        /* Overlay when menu is open */
-        body.menu-open::before {
-          content: "";
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.3);
-          z-index: 9999;
-        }
-
-        /* Hamburger Button */
-        #hamburgerBtn {
+        /* Hamburger button */
+        .hamburger {
           display: flex;
-          position: fixed;
-          top: 15px;
-          right: 15px;
-          width: 38px;
-          height: 30px;
           flex-direction: column;
           justify-content: space-around;
+          width: 30px;
+          height: 24px;
           cursor: pointer;
-          z-index: 11000;
           background: transparent;
           border: none;
-          padding: 0;
-          outline: none;
+          margin-right: 1rem;
+          z-index: 11000;
         }
-
-        #hamburgerBtn span {
-          display: block;
-          width: 100%;
-          height: 4px;
-          background: var(--primary-color);
-          border-radius: 4px;
-          transition: all 0.3s ease;
-          transform-origin: center;
+        .hamburger:focus {
+          outline: 2px solid var(--primary-color);
+          outline-offset: 2px;
         }
-
-        /* Animate hamburger to X when open */
-        #hamburgerBtn.open span:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        #hamburgerBtn.open span:nth-child(2) {
-          opacity: 0;
-        }
-        #hamburgerBtn.open span:nth-child(3) {
-          transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* Hide original logo margin if needed on mobile */
-        .header {
+        .hamburger div {
+          width: 30px;
+          height: 3px;
+          background-color: var(--primary-color);
+          border-radius: 2px;
+          transition: all 0.3s linear;
           position: relative;
-          padding: 0 1rem;
+          transform-origin: 1px;
+        }
+
+        /* Animate hamburger to "X" when active */
+        .hamburger.active div:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        .hamburger.active div:nth-child(2) {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        .hamburger.active div:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        /* Hide original navbar in header */
+        header .navbar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--background-white);
+          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          z-index: 9999;
+          padding-top: 4.5rem;
         }
       }
 
-      /* On larger screens, show normal nav */
-      @media (min-width: 481px) {
-        #hamburgerBtn {
-          display: none;
+      /* Show hamburger only on mobile */
+      .hamburger {
+        display: none;
+      }
+
+      @media (max-width: 480px) {
+        .hamburger {
+          display: flex;
         }
       }
     </style>
@@ -305,16 +307,16 @@
         <span class="visually-hidden">VibeEarning</span>
       </a>
 
-      <!-- Hamburger menu button for mobile -->
+      <!-- Hamburger Toggle Button for Mobile -->
       <button
-        id="hamburgerBtn"
+        class="hamburger"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
         aria-controls="primary-navigation"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <div></div>
+        <div></div>
+        <div></div>
       </button>
 
       <nav
@@ -424,36 +426,16 @@
       }
       window.addEventListener("keydown", handleFirstTab);
 
-      // Hamburger menu toggle functionality for mobile navigation
-      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      // Responsive navigation hamburger toggle - EXACTLY from faq.html
+      const hamburger = document.querySelector(".hamburger");
       const navbar = document.querySelector(".navbar");
 
-      hamburgerBtn.addEventListener("click", () => {
-        const isOpen = navbar.classList.toggle("open");
-        hamburgerBtn.classList.toggle("open");
-        hamburgerBtn.setAttribute("aria-expanded", isOpen);
-        // Add/remove class to body to enable overlay for accessibility
-        if (isOpen) {
-          document.body.classList.add("menu-open");
-          // Trap focus inside nav when open (optional enhancement)
-          // You could add focus trap code here if needed
-        } else {
-          document.body.classList.remove("menu-open");
-        }
-      });
-
-      // Clicking outside nav closes menu on mobile
-      document.addEventListener("click", (e) => {
-        if (
-          !navbar.contains(e.target) &&
-          !hamburgerBtn.contains(e.target) &&
-          navbar.classList.contains("open")
-        ) {
-          navbar.classList.remove("open");
-          hamburgerBtn.classList.remove("open");
-          hamburgerBtn.setAttribute("aria-expanded", false);
-          document.body.classList.remove("menu-open");
-        }
+      hamburger.addEventListener("click", () => {
+        const expanded =
+          hamburger.getAttribute("aria-expanded") === "true" || false;
+        hamburger.setAttribute("aria-expanded", !expanded);
+        hamburger.classList.toggle("active");
+        navbar.classList.toggle("active");
       });
 
       // Waits two minutes, then sends a "real visitor" ping to backend

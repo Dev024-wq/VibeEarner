@@ -89,7 +89,7 @@
         z-index: 9999;
       }
       .logo img {
-        height: 45px;
+        height: 75px;
         margin-right: 15px;
         transition: transform 0.3s var(--ease-curve);
       }
@@ -444,6 +444,7 @@
         }
       }
 
+      /* Responsive Navbar Styles - Added from FAQ */
       /* Hide original nav-links on small screens */
       @media (max-width: 480px) {
         .navbar {
@@ -555,7 +556,7 @@
         <span class="visually-hidden">VibeEarning</span>
       </a>
 
-      <!-- Hamburger button for mobile -->
+      <!-- Hamburger Toggle Button for Mobile -->
       <button
         class="hamburger"
         aria-label="Toggle navigation menu"
@@ -567,8 +568,13 @@
         <div></div>
       </button>
 
-      <nav class="navbar" role="navigation" aria-label="Primary navigation">
-        <ul class="nav-links" role="menubar" id="primary-navigation">
+      <nav
+        class="navbar"
+        role="navigation"
+        aria-label="Primary navigation"
+        id="primary-navigation"
+      >
+        <ul class="nav-links" role="menubar">
           <li role="none">
             <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
           </li>
@@ -631,7 +637,7 @@
           >
             <span class="about-card-label">Expertise</span>
             <span class="about-card-value"
-              >Retirement, Children’s Education,<br />Health & Term
+              >Retirement, Children's Education,<br />Health & Term
               Insurance</span
             >
           </div>
@@ -841,7 +847,7 @@
                 />
                 <blockquote>
                   <p>
-                    "It’s more than a job—it's a family. The growth and
+                    "It's more than a job—it's a family. The growth and
                     recognition I get here is amazing."
                   </p>
                   <footer>- Nikeshbhai Chamar, 13 years</footer>
@@ -857,7 +863,7 @@
                 />
                 <blockquote>
                   <p>
-                    "VibeEarning’s mentorship and the sense of community helped
+                    "VibeEarning's mentorship and the sense of community helped
                     me grow rapidly as an LIC agent."
                   </p>
                   <footer>- Vraj Patel, 12 years</footer>
@@ -920,7 +926,7 @@
                 />
                 <blockquote>
                   <p>
-                    "The continual support makes VibeEarning stand out. It’s a
+                    "The continual support makes VibeEarning stand out. It's a
                     team with values, not just business."
                   </p>
                   <footer>-Bharatbhai Barot, 5 years</footer>
@@ -944,7 +950,7 @@
             />
             <div>
               <p>
-                "Mr.Chavda provided the best guidance and care for our family’s
+                "Mr.Chavda provided the best guidance and care for our family's
                 insurance needs. A trusted advisor who truly understands his
                 clients."
               </p>
@@ -996,7 +1002,7 @@
             });
             slider.addEventListener("touchmove", function (e) {
               if (!isDragging) return;
-              let diff = e.touches[0].clientX - startX;
+              let diff = e.touches.clientX - startX;
               if (Math.abs(diff) > 60) {
                 if (diff > 0) prevBtn.click();
                 else nextBtn.click();
@@ -1081,42 +1087,18 @@
       setInterval(updateRealVisitorStat, 40000);
     </script>
 
-    <!-- New JS for hamburger menu toggle -->
+    <!-- Hamburger menu toggle script from FAQ.html -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const hamburger = document.querySelector(".hamburger");
-        const navLinks = document.querySelector(".nav-links");
+      // Responsive navigation hamburger toggle
+      const hamburger = document.querySelector(".hamburger");
+      const navbar = document.querySelector(".navbar");
 
-        hamburger.addEventListener("click", function () {
-          const expanded =
-            this.getAttribute("aria-expanded") === "true" || false;
-          this.setAttribute("aria-expanded", !expanded);
-          this.classList.toggle("active");
-          navLinks.classList.toggle("open");
-          // Optional: prevent body scroll when nav open on mobile
-          if (navLinks.classList.contains("open")) {
-            document.body.style.overflow = "hidden";
-          } else {
-            document.body.style.overflow = "";
-          }
-        });
-
-        // Close menu when a link is clicked (optional for UX)
-        navLinks.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            if (navLinks.classList.contains("open")) {
-              hamburger.click();
-            }
-          });
-        });
-
-        // Close menu with ESC key (accessibility)
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && navLinks.classList.contains("open")) {
-            hamburger.click();
-            hamburger.focus();
-          }
-        });
+      hamburger.addEventListener("click", () => {
+        const expanded =
+          hamburger.getAttribute("aria-expanded") === "true" || false;
+        hamburger.setAttribute("aria-expanded", !expanded);
+        hamburger.classList.toggle("active");
+        navbar.classList.toggle("active");
       });
     </script>
   </body>

@@ -224,103 +224,103 @@
       border-bottom: 2px solid var(--primary-color);
     }
 
- /* Hide original nav-links on small screens */
-      @media (max-width: 480px) {
-        .navbar {
-          position: fixed;
-          top: 0;
-          right: 0;
-          height: 100vh;
-          width: 250px;
-          background: var(--background-white);
-          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-          transform: translateX(100%);
-          transition: transform 0.3s ease-in-out;
-          z-index: 10000;
-          padding-top: 4.5rem; /* To clear header */
-        }
-        .navbar.active {
-          transform: translateX(0);
-        }
-        .nav-links {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-          padding-left: 1.5rem;
-        }
-        .nav-links li a {
-          font-size: 1.25rem;
-        }
-        /* Hide nav-links in header since the navbar slides in */
-        .navbar:not(.active) ul {
-          pointer-events: none;
-        }
-
-        /* Hamburger button */
-        .hamburger {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          width: 30px;
-          height: 24px;
-          cursor: pointer;
-          background: transparent;
-          border: none;
-          margin-right: 1rem;
-          z-index: 11000;
-        }
-        .hamburger:focus {
-          outline: 2px solid var(--primary-color);
-          outline-offset: 2px;
-        }
-        .hamburger div {
-          width: 30px;
-          height: 3px;
-          background-color: var(--primary-color);
-          border-radius: 2px;
-          transition: all 0.3s linear;
-          position: relative;
-          transform-origin: 1px;
-        }
-
-        /* Animate hamburger to "X" when active */
-        .hamburger.active div:nth-child(1) {
-          transform: rotate(45deg);
-        }
-        .hamburger.active div:nth-child(2) {
-          opacity: 0;
-          transform: translateX(20px);
-        }
-        .hamburger.active div:nth-child(3) {
-          transform: rotate(-45deg);
-        }
-
-        /* Hide original navbar in header */
-        header .navbar {
-          position: fixed;
-          top: 0;
-          right: 0;
-          height: 100vh;
-          width: 250px;
-          background: var(--background-white);
-          box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
-          transform: translateX(100%);
-          transition: transform 0.3s ease-in-out;
-          z-index: 9999;
-          padding-top: 4.5rem;
-        }
+    /* Hide original nav-links on small screens */
+    @media (max-width: 480px) {
+      .navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        background: var(--background-white);
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 10000;
+        padding-top: 4.5rem; /* To clear header */
+      }
+      .navbar.active {
+        transform: translateX(0);
+      }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-left: 1.5rem;
+      }
+      .nav-links li a {
+        font-size: 1.25rem;
+      }
+      /* Hide nav-links in header since the navbar slides in */
+      .navbar:not(.active) ul {
+        pointer-events: none;
       }
 
-      /* Show hamburger only on mobile */
+      /* Hamburger button */
       .hamburger {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        margin-right: 1rem;
+        z-index: 11000;
+      }
+      .hamburger:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+      }
+      .hamburger div {
+        width: 30px;
+        height: 3px;
+        background-color: var(--primary-color);
+        border-radius: 2px;
+        transition: all 0.3s linear;
+        position: relative;
+        transform-origin: 1px;
       }
 
-      @media (max-width: 480px) {
-        .hamburger {
-          display: flex;
-        }
+      /* Animate hamburger to "X" when active */
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg);
       }
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+
+      /* Hide original navbar in header */
+      header .navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        background: var(--background-white);
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 9999;
+        padding-top: 4.5rem;
+      }
+    }
+
+    /* Show hamburger only on mobile */
+    .hamburger {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .hamburger {
+        display: flex;
+      }
+    }
 
     /* Hero Section */
     .hero {
@@ -568,7 +568,7 @@
     }
 
     /* Scroll To Top Button */
-    .scroll-to-top {
+    #scrollToTop {
       position: fixed;
       bottom: 3rem;
       right: 3rem;
@@ -590,8 +590,8 @@
       user-select: none;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .scroll-to-top:hover,
-    .scroll-to-top:focus {
+    #scrollToTop:hover,
+    #scrollToTop:focus {
       outline: none;
       opacity: 1;
       transform: translateY(-5px) scale(1.1) rotate(-10deg);
@@ -602,7 +602,7 @@
         var(--primary-color)
       );
     }
-    .scroll-to-top .arrow-up {
+    #scrollToTop .arrow-up {
       display: inline-block;
       width: 0;
       height: 0;
@@ -723,116 +723,6 @@
         height: 50px;
         margin-right: 8px;
       }
-      /* Show hamburger and hide nav links by default */
-      #menuToggle {
-        display: block;
-      }
-      .nav-links {
-        flex-direction: column;
-        gap: 0.9rem;
-        background-color: var(--background-white);
-        position: fixed;
-        top: 60px;
-        right: 0;
-        width: 180px;
-        padding: 1rem;
-        box-shadow: 0 4px 15px var(--shadow-strong);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 10001;
-        height: calc(100% - 60px);
-        overflow-y: auto;
-      }
-      .nav-links.open {
-        transform: translateX(0);
-      }
-      .nav-links a {
-        font-size: 0.875rem;
-        padding: 0.5em 0;
-        display: block;
-        border-bottom: 1px solid #eee;
-      }
-      .hero {
-        padding: 2rem 1rem;
-        flex-direction: column;
-      }
-      .hero .hero-content h1 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-      }
-      .hero .hero-content p {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      .hero .hero-image {
-        width: 180px;
-        height: 180px;
-        margin-top: 1.5rem;
-      }
-      .stats-section {
-        padding: 1.2rem;
-        margin: 3rem 0;
-      }
-      .stats-section .stats-grid {
-        flex-direction: column;
-        gap: 1.2rem;
-        align-items: center;
-      }
-      .stats-section .stat-box {
-        width: 90%;
-        min-width: unset;
-        flex: none;
-        margin-bottom: 1rem;
-      }
-      .how-to-join {
-        padding: 0 1rem;
-        max-width: 100%;
-      }
-      .join-grid {
-        gap: 1rem;
-      }
-      .join-grid .join-step {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        padding: 1.5rem 1rem;
-      }
-      .join-step .join-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
-        box-shadow: 0 0 8px var(--primary-color);
-      }
-      .join-step strong {
-        font-size: 1rem;
-        display: block;
-        margin-top: 0.5rem;
-      }
-      .join-step p {
-        font-size: 0.875rem;
-        margin-top: 0.3rem;
-      }
-      .benefits-section {
-        padding: 1rem;
-        max-width: 100%;
-        margin: 3rem 0 5rem;
-      }
-      .benefits-section .benefits-grid {
-        gap: 1.5rem;
-        justify-content: center;
-      }
-      .benefits-section .benefit {
-        max-width: 100%;
-        padding: 2rem 1.5rem;
-      }
-      .scroll-to-top {
-        bottom: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-        padding: 0.5rem 0.6rem;
-      }
     }
   </style>
 </head>
@@ -840,24 +730,29 @@
   <!-- Header -->
   <header class="header flex-between" role="banner">
     <a href="index.html" class="logo flex-center" aria-label="VibeEarning Home">
-      <img src="assets/img/logo.png" alt="VibeEarning Logo" />
+      <img src="assets/img/logo.png" alt="VibeEarning Logo" height="45" />
       <span class="visually-hidden">VibeEarning</span>
     </a>
 
-    <!-- Hamburger toggle button for mobile -->
-      <button
-        class="hamburger"
-        aria-label="Toggle navigation menu"
-        aria-expanded="false"
-        aria-controls="primary-navigation"
-      >
-        <div></div>
-        <div></div>
-        <div></div>
-      </button>
+    <!-- Hamburger Toggle Button for Mobile -->
+    <button
+      class="hamburger"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+    >
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
 
-    <nav class="navbar" role="navigation" aria-label="Primary navigation">
-      <ul id="primary-menu" class="nav-links" role="menubar">
+    <nav
+      class="navbar"
+      role="navigation"
+      aria-label="Primary navigation"
+      id="primary-navigation"
+    >
+      <ul class="nav-links" role="menubar">
         <li role="none">
           <a href="join.html" role="menuitem" tabindex="0">Join As Agent</a>
         </li>
@@ -1011,25 +906,7 @@
   </button>
 
   <!-- Scripts -->
-  <script src="assets/main.js" defer></script>
   <script>
-    // Visitor count updater
-    function updateVisitorCount() {
-      fetch("real_visit.php")
-        .then((res) => (res.ok ? res.text() : Promise.resolve("—")))
-        .then((text) => {
-          const count = text.trim();
-          document.getElementById("visitors-count").textContent =
-            /^\d+$/.test(count) ? count : "—";
-        })
-        .catch(() => {
-          document.getElementById("visitors-count").textContent = "—";
-        });
-    }
-    updateVisitorCount();
-    setInterval(updateVisitorCount, 40000);
-
-    // Scroll to top button toggle
     const scrollBtn = document.getElementById("scrollToTop");
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 200) {
@@ -1051,15 +928,42 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Mobile menu toggle
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("primary-menu");
+    // Hamburger menu toggle (same as faq.html)
+    const hamburger = document.querySelector(".hamburger");
+    const navbar = document.querySelector(".navbar");
 
-    menuToggle.addEventListener("click", () => {
-      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", String(!expanded));
-      navLinks.classList.toggle("open");
+    hamburger.addEventListener("click", () => {
+      const expanded =
+        hamburger.getAttribute("aria-expanded") === "true" || false;
+      hamburger.setAttribute("aria-expanded", !expanded);
+      hamburger.classList.toggle("active");
+      navbar.classList.toggle("active");
     });
+
+    // Visitor count updater
+    function updateVisitorCount() {
+      fetch("real_visit.php")
+        .then((res) => (res.ok ? res.text() : Promise.resolve("—")))
+        .then((text) => {
+          const count = text.trim();
+          document.getElementById("visitors-count").textContent =
+            /^\d+$/.test(count) ? count : "—";
+        })
+        .catch(() => {
+          document.getElementById("visitors-count").textContent = "—";
+        });
+    }
+    updateVisitorCount();
+    setInterval(updateVisitorCount, 40000);
+
+    // Accessibility: Show outline only on keyboard navigation
+    function handleFirstTab(e) {
+      if (e.key === "Tab") {
+        document.body.classList.add("user-is-tabbing");
+        window.removeEventListener("keydown", handleFirstTab);
+      }
+    }
+    window.addEventListener("keydown", handleFirstTab);
   </script>
 </body>
 </html>
