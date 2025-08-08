@@ -54,14 +54,14 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'randomzeno204@gmail.com';   // << Replace with your Gmail
-    $mail->Password   = 'nxaj mvhx oyam dnvn';      // << Use Gmail App Password here
+    $mail->Username   = 'jassi23bum@gmail.com';   // << Replace with your Gmail
+    $mail->Password   = 'zain iwiy emuk ppgh';      // << Use Gmail App Password here
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
     // Sender and recipient
-    $mail->setFrom('randomzeno204@gmail.com', 'VibeEarning Contact');
-    $mail->addAddress('randomzeno204@gmail.com');    // << Your email where you receive messages
+    $mail->setFrom('jassi23bum@gmail.com', 'VibeEarning Contact');
+    $mail->addAddress('jassi23bum@gmail.com');    // << Your email where you receive messages
 
     // Reply-to is the submitter
     $mail->addReplyTo($email, $firstName . ' ' . $lastName);
