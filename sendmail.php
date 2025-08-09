@@ -60,7 +60,7 @@ try {
     $mail->Port       = 587;
 
     // Sender and recipient
-    $mail->setFrom('jassi23bum@gmail.com', 'VibeEarning Contact');
+    $mail->setFrom('jassi23bum@gmail.com', 'VibeEarner Contact');
     $mail->addAddress('jassi23bum@gmail.com');    // << Your email where you receive messages
 
     // Reply-to is the submitter
@@ -68,7 +68,7 @@ try {
 
     // Email content
     $mail->isHTML(false);
-    $mail->Subject = 'New Join Submission from VibeEarning';
+    $mail->Subject = 'New Join Submission from VibeEarner';
     $mail->Body    = "New Join Application Details:\n"
         . "First Name: $firstName\n"
         . "Last Name: $lastName\n"
